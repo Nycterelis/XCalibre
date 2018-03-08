@@ -9,6 +9,8 @@ namespace XCalibre.Models
     {
         public int Id { get; set; }
         public string Name { get; set; }
+        public string PmId { get; set; }
+
 
         public virtual ICollection<Ticket> Tickets { get; set; }
         public virtual ICollection<ApplicationUser> Users { get; set; }

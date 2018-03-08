@@ -7,6 +7,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using XCalibre.Models;
+using XCalibre.Models.Helpers;
 
 namespace XCalibre.Controllers
 {
@@ -17,6 +18,13 @@ namespace XCalibre.Controllers
         // GET: Projects
         public ActionResult Index()
         {
+             
+            //ProjectHelper helper = new ProjectHelper();
+
+            //if (User.IsInRole("Admin, ProjectManager"))
+            //{
+            //    return View(db.Projects.ToList());
+            //}
             return View(db.Projects.ToList());
         }
 
@@ -123,5 +131,6 @@ namespace XCalibre.Controllers
             }
             base.Dispose(disposing);
         }
+        
     }
 }

@@ -2,6 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.EntityFramework;
+using XCalibre.Models.Helpers;
 
 namespace XCalibre.Models.Helpers
 {
@@ -53,6 +56,26 @@ namespace XCalibre.Models.Helpers
             }
         }
 
+        public Exception AddPmToProject(string UserId, int ProjectId)
+        {
+            try
+            {
+                var prj = db.Projects.Find(ProjectId);
+                var pm = UserId;
+                if (!db.Projects.Any(u => u.PmId == pm))
+                {
+                    prj.PmId = pm;
+                    db.SaveChanges();
+                }
+                return null;
+            }
+            catch (Exception ex)
+            {
+
+                return ex;
+            }
+        }
+       
         public Exception RemoveUserToProject(string UserId, int ProjectId)
         {
             try

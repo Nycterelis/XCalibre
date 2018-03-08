@@ -7,7 +7,15 @@
 <h2>Edit</h2>
 
 
-@using (Html.BeginForm())
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
+@*@using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
     
@@ -31,12 +39,4 @@
             </div>
         </div>
     </div>
-}
-
-<div>
-    @Html.ActionLink("Back to List", "Index")
-</div>
-
-@section Scripts {
-    @Scripts.Render("~/bundles/jqueryval")
-}
+}*@

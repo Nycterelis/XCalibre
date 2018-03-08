@@ -1,0 +1,38 @@
+﻿@model IEnumerable<XCalibre.Models.Project>
+
+@{
+    ViewBag.Title = "My Projects";
+}
+
+<h2>My Projects</h2>
+
+
+<table class="table">
+    <tr>
+        <th>
+           <h3> Project Name</h3>
+        </th>
+        <th></th>
+    </tr>
+    
+    
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+                
+            </td>
+            <td>
+                @*@Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
+                @Html.ActionLink("Details", "Details", new { id = item.Id }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.Id }) |*@
+                @*@Html.ActionLink("Edit Users", "EditProjectUser", "AdminProjectView", new { id = item.Id }, null)*@
+            </td>
+        </tr>
+    }
+
+    
+
+
+</table>

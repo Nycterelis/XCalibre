@@ -69,3 +69,10 @@ D:\Projects\XCalibre\XCalibre\bin\Microsoft.AI.Web.xml
 D:\Projects\XCalibre\XCalibre\obj\Debug\XCalibre.dll
 D:\Projects\XCalibre\XCalibre\obj\Debug\XCalibre.pdb
 D:\Projects\XCalibre\XCalibre\obj\Debug\XCalibre.csprojResolveAssemblyReference.cache
+D:\Projects\XCalibre\XCalibre\bin\SendGrid.dll
+D:\Projects\XCalibre\XCalibre\bin\SendGrid.pdb
+D:\Projects\XCalibre\XCalibre\bin\SendGrid.xml
+D:\Projects\XCalibre\XCalibre\bin\PagedList.dll
+D:\Projects\XCalibre\XCalibre\bin\PagedList.Mvc.dll
+D:\Projects\XCalibre\XCalibre\bin\PagedList.xml
+D:\Projects\XCalibre\XCalibre\bin\PagedList.Mvc.xml
