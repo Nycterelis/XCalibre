@@ -141,7 +141,7 @@ namespace XCalibre.Migrations
             {
                 context.TicketTypes.Add(new TicketType { Name = "Production Fix" });
             }
-            if (!context.TicketTypes.Any(t => t.Name == "Projet Task"))
+            if (!context.TicketTypes.Any(t => t.Name == "Project Task"))
             {
                 context.TicketTypes.Add(new TicketType { Name = "Project Task" });
             }
@@ -166,6 +166,10 @@ namespace XCalibre.Migrations
             if (!context.TicketPriorities.Any(p => p.Name == "Low"))
             {
                 context.TicketPriorities.Add(new TicketPriority { Name = "Low" });
+            }
+            if (!context.TicketPriorities.Any(p => p.Name == "New"))
+            {
+                context.TicketPriorities.Add(new TicketPriority { Name = "New" });
             }
         }
     }

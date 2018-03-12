@@ -45,7 +45,7 @@ namespace XCalibre.Controllers
         }
 
         //GET: EditUser
-        //[Authorize(Roles = "Admin, ProjectManager")]
+        [Authorize(Roles = "Admin")]
         public ActionResult EditUser(string id)
         {
             var user = db.Users.Find(id);
@@ -63,7 +63,7 @@ namespace XCalibre.Controllers
         //POST: EditUser
         [HttpPost]
         [ValidateAntiForgeryToken]
-        //[Authorize(Roles = "Admin, ProjectManager")]
+        [Authorize(Roles = "Admin")]
         public ActionResult EditUser([Bind(Include = "User, Roles, SelectedRoles")]AdminUserViewModel model)
         {
             var userId = model.User.Id;

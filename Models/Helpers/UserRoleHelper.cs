@@ -73,17 +73,22 @@ namespace XCalibre.Models.Helpers
         {
             return userManager.GetRoles(UserId);
         }
-        public ICollection<ApplicationUser> UsersInRole(string Role)
-        {
-            var resultList = new List<ApplicationUser>();
-            var List = userManager.Users.ToList();
-            foreach (var user in List)
-            {
-                if (IsUserinRole(user.Id, Role))
-                    resultList.Add(user);
-            }
-            return resultList;
+        //public ICollection<ApplicationUser> UsersInRole(string Role)
+        //{
+        //    var resultList = new List<ApplicationUser>();
+        //    var List = userManager.Users.ToList();
+        //    foreach (var user in List)
+        //    {
+        //        if (IsUserinRole(user.Id, Role))
+        //            resultList.Add(user);
+        //    }
+        //    return resultList;
 
+        //}
+        public ICollection<ApplicationUser> UsersInRole(string roleName)
+        {
+            var userIDs = roleManager.Roles.FirstOrDefault(r => r.Name == roleName).Users.Select(u => u.UserId).ToList();
+            return userManager.Users.Where(u => userIDs.Contains(u.Id)).ToList();
         }
     }
 }

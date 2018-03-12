@@ -34,21 +34,37 @@ namespace XCalibre.Models.Helpers
         }
 
 
+        //public Exception AddUserToProject(string UserId, int ProjectId)
+        //{
+        //    try
+        //    {
+
+        //        var prj = db.Projects.Find(ProjectId);
+        //        var usr = db.Users.Find(UserId);
+        //        if (!IsUserOnProject(UserId, ProjectId) == true)
+        //        {
+
+        //            prj.Users.Add(usr);
+        //            db.SaveChanges();
+        //        }
+        //        return null;
+
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        return ex;
+        //    }
+        //}
+
         public Exception AddUserToProject(string UserId, int ProjectId)
         {
             try
             {
-
                 var prj = db.Projects.Find(ProjectId);
                 var usr = db.Users.Find(UserId);
-                if (!IsUserOnProject(UserId, ProjectId) == true)
-                {
-
-                    prj.Users.Add(usr);
-                    db.SaveChanges();
-                }
+                prj.Users.Add(usr);
+                db.SaveChanges();
                 return null;
-
             }
             catch (Exception ex)
             {

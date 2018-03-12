@@ -24,10 +24,9 @@
                 
             </td>
             <td>
-                @*@Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
-                @Html.ActionLink("Details", "Details", new { id = item.Id }) |
-                @Html.ActionLink("Delete", "Delete", new { id = item.Id }) |*@
-                @*@Html.ActionLink("Edit Users", "EditProjectUser", "AdminProjectView", new { id = item.Id }, null)*@
+               
+                @Html.ActionLink("Details", "Details", "Projects", new { id = item.Id }, null) 
+               
             </td>
         </tr>
     }

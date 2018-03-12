@@ -25,6 +25,7 @@ namespace XCalibre.Controllers
         //}
 
         //GET EditProjectUser
+        [Authorize(Roles = "Admin, ProjectManager")]
         public ActionResult EditProjectUser(int id)
         {
             var prj = db.Projects.Find(id);
@@ -32,7 +33,7 @@ namespace XCalibre.Controllers
             ProjectHelper helper = new ProjectHelper();
             var selected = db.Users.ToList();
             adminProject.Projects = new Project();
-            adminProject.User = new MultiSelectList(db.Users, "FullName", "FullName", selected);
+            adminProject.User = new MultiSelectList(db.Users, "Id", "FullName", selected);
             adminProject.Projects.Id = prj.Id;
             adminProject.Name = prj.Name;
 
@@ -41,8 +42,8 @@ namespace XCalibre.Controllers
 
          [HttpPost]
          [ValidateAntiForgeryToken]
-         //[Authorize(Roles = "Admin, ProjectManager"]
-         public ActionResult EditProjectUser([Bind(Include ="User, Projects, SelectedUsers")]AdminProjectViewModel model)
+         [Authorize(Roles = "Admin, ProjectManager")]
+         public ActionResult EditProjectUser([Bind(Include ="Id, Name, User, Projects, SelectedUsers")]AdminProjectViewModel model)
         {
             var prjId = model.Projects.Id;
             ProjectHelper helper = new ProjectHelper();
@@ -58,6 +59,7 @@ namespace XCalibre.Controllers
         }
 
         //GET: Edit the Project Manager
+        [Authorize(Roles = "Admin")]
         public ActionResult EditProjectManager(int id)
         {
             AdminProjectViewModel adminProject = new AdminProjectViewModel();
@@ -73,7 +75,7 @@ namespace XCalibre.Controllers
         //POST: Edit Project Manager
         [HttpPost]
         [ValidateAntiForgeryToken]
-        //[Authorize(Roles = "Admin")]
+        [Authorize(Roles = "Admin")]
         public ActionResult EditProjectManager([Bind(Include = "PmId, Projects, SelectedUser")]AdminProjectViewModel model)
         {
             var prjId = model.Projects.Id;

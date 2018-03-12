@@ -76,3 +76,4 @@ D:\Projects\XCalibre\XCalibre\bin\PagedList.dll
 D:\Projects\XCalibre\XCalibre\bin\PagedList.Mvc.dll
 D:\Projects\XCalibre\XCalibre\bin\PagedList.xml
 D:\Projects\XCalibre\XCalibre\bin\PagedList.Mvc.xml
+D:\Projects\XCalibre\XCalibre\obj\Debug\XCalibre.csproj.CopyComplete
