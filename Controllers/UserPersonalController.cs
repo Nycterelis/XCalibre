@@ -19,7 +19,7 @@ namespace XCalibre.Controllers
         public ActionResult MyProjects()
         {
             var userId = User.Identity.GetUserId();
-            var userProjects = db.Users.Find(userId).Projects.Where(p => p.PmId == userId).ToList();
+            //var userProjects = db.Users.Find(userId).Projects.Where(p => p.PmId == userId).ToList();
             var assignedProjects = db.Users.Find(userId).Projects.ToList();
 
             return View(assignedProjects);
@@ -30,7 +30,7 @@ namespace XCalibre.Controllers
         public ActionResult MyManagedProjects()
         {
             var userId = User.Identity.GetUserId();
-            var userProjects = db.Users.Find(userId).Projects.Where(p => p.PmId == userId).ToList();
+            var userProjects = db.Projects.Where(p => p.PmId == userId).ToList();
 
             return View(userProjects);
         }

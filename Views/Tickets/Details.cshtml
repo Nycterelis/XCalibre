@@ -7,20 +7,142 @@
 
 <h2>Details</h2>
 
-<div>
-    <h4>Ticket</h4>
+<div class="row">
+    <div class="col-md-8">
+        <div class="card-box task-detail">
+            <div class="media mt-0 m-b-30">
+                @*<img class="d-flex mr-3 rounded-circle" alt="64x64" src="assets/images/users/avatar-2.jpg" style="width: 48px; height: 48px;">*@
+                <div class="media-body">
+                    <h5 class="media-heading mb-0 mt-0">@Html.DisplayFor(model => model.OwnerUser.FullName)</h5>
+                    @if (Model.TicketPriority.Name == "Urgent")
+                    {
+                        <span class="badge badge-danger">@Html.DisplayFor(model => model.TicketPriority.Name)</span>
+
+                    }
+                    @if (Model.TicketPriority.Name == "New")
+                    {
+                        <span class="badge badge-success">@Html.DisplayFor(model => model.TicketPriority.Name)</span>
+
+                    }
+                    @if (Model.TicketPriority.Name == "Low")
+                    {
+                        <span class="badge badge-purple">@Html.DisplayFor(model => model.TicketPriority.Name)</span>
+
+                    }
+                    @if (Model.TicketPriority.Name == "Mid")
+                    {
+                        <span class="badge badge-warning">@Html.DisplayFor(model => model.TicketPriority.Name)</span>
+
+                    }
+                    @if (Model.TicketPriority.Name == "High")
+                    {
+                        <span class="badge badge-danger">@Html.DisplayFor(model => model.TicketPriority.Name)</span>
+
+                    }
+                </div>
+            </div>
+            <h4 class="m-b-20">@Html.DisplayFor(model => model.Title)</h4>
+
+            <p class="text-muted">
+                @Html.DisplayFor(model => model.Body)
+            </p>
+
+            <ul class="list-inline task-dates m-b-0 mt-5">
+                <li>
+                    <h5 class="m-b-5">Created</h5>
+                    <p>@Html.DisplayFor(model => model.Created).ToString().AsDateTime().ToString("MMM dd yyyy")</p>
+                </li>
+
+                <li>
+                    <h5 class="m-b-5">Last Update</h5>
+                    <p>@Html.DisplayFor(model => model.Updated)</p>
+                </li>
+            </ul>
+            <div class="clearfix"></div>
+
+
+            @if (User.IsInRole("Admin"))
+            {
+                <div class="assign-team mt-4">
+                    <h5 class="m-b-5">Assigned to</h5>
+                    @Html.DisplayFor(model => model.AssignedToUser.FullName)
+                </div>
+            }
+            @if (User.IsInRole("ProjectManager"))
+            {
+                <div class="assign-team mt-4">
+                    <h5 class="m-b-5">Assigned to</h5>
+                    @Html.DisplayFor(model => model.AssignedToUser.FullName)
+                </div>
+            }
+
+            <div class="attached-files mt-4">
+                <h5 class="">Attached Files </h5>
+                <div class="files-list">
+                    <div class="file-box">
+                        @foreach (var att in Model.Attachments)
+                        {
+                            if (att.FileUrl != null)
+                            {
+                                <img class="img-responsive" width="100%" height="100%" src="@Url.Content(att.FileUrl)" alt="" />
+                            }
+                        }
+                        @*<a href=""><img src="assets/images/attached-files/img-1.jpg" class="img-responsive img-thumbnail" alt="attached-img"></a>
+                            <p class="font-13 mb-1 text-muted"><small>File one</small></p>*@
+                    </div>
+
+
+                    <div class="file-box ml-3">
+                        <span>@Html.ActionLink("+", "Create", "TicketAttachments", new { TicketId = Model.Id }, new { @class = "add-new-plus"}) </span>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="text-right m-t-30">
+                            <button type="submit" class="btn btn-success waves-effect waves-light">
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="col-md-4">
+        <div class="card-box">
+            <h4 class="header-title m-b-30">Comments @Model.Comments.Where(i => i.TicketId == Model.Id).Count()</h4>
+
+            <div>
+
+                <div class="media m-b-20">
+                    <div class="d-flex mr-3">
+                        @*<a href="#"> <img class="media-object rounded-circle thumb-sm" alt="64x64" src="assets/images/users/avatar-1.jpg"> </a>*@
+                    </div>
+                    <div class="media-body">
+                        <ul>
+                            @foreach (var comm in Model.Comments)
+                            {
+                                <li>
+                                    <p>
+                                        <h5 class="mt-0">@comm.User.FullName <span> on @comm.Created.ToString("MMM dd yyyy")</span></h5>
+                                    </p>
+                                    <p class="font-13 text-muted mb-0">
+                                        @comm.Body
+                                    </p>
+                                </li>
+                            }
+                        </ul>
+                    </div>
+                </div>
+                @Html.ActionLink("Comment", "Create", "TicketComments", new { TicketId = Model.Id }, new { @class = "btn btn-primary" })
+            </div>
+        </div>
+    </div>
+</div>
+@*<h4>Ticket</h4>
     <hr />
     <dl class="dl-horizontal">
-        @if (User.IsInRole("Admin"))
-        {
-            <dt>Assigned To</dt>
-            <dd>@Html.DisplayFor(model => model.AssignedToUser.FullName)</dd>
-        }
-        @if (User.IsInRole("ProjectManager"))
-        {
-            <dt>Assigned To</dt>
-            <dd>@Html.DisplayFor(model => model.AssignedToUser.FullName)</dd>
-        }
 
         <dt>@Html.DisplayNameFor(model => model.OwnerUser.FullName)</dt>
         <dd>@Html.DisplayFor(model => model.OwnerUser.FullName)</dd>
@@ -60,31 +182,35 @@
         <dd>@Html.DisplayFor(model => model.Updated)</dd>
 
     </dl>
-</div>
+    </div>*@
 <p>
-    @if (User.IsInRole("Admin, ProjectManager"))
+    @if (User.IsInRole("Admin"))
+    {
+        @Html.ActionLink("Edit", "Edit", new { id = Model.Id })
+    }
+    @if (User.IsInRole("ProjectManager"))
     {
         @Html.ActionLink("Edit", "Edit", new { id = Model.Id })
     }
     @Html.ActionLink("Back to List", "Index") |
     @Html.ActionLink("Comment", "Create", "TicketComments", new { TicketId = Model.Id }, null)
+    @Html.ActionLink("Comment", "Create", "TicketAttachments", new { TicketId = Model.Id }, null)
 </p>
-<div>
-    @*@Html.Partial("_CommPart", new TicketComment() { TicketId = Model.Id })*@
-    <ul>
-        @foreach (var comm in Model.Comments)
-        {
-            <li>
-                <div>
-                    <p>
-                        <h5>@comm.User.FullName <span> on @comm.Created</span></h5>
-                    </p>
-                    <p>
-                        @comm.Body
-                    </p>
-                </div>
-            </li>
-        }
+@*<div class="col-md-12">
 
-    </ul>
-</div>
+        <div class="col-md-4">
+
+            <ul>
+
+            </ul>
+        </div>
+        <div class="col-md-4">
+            @foreach (var att in Model.Attachments)
+            {
+                if (att.FileUrl != null)
+                {
+                    <img class="img-responsive" src="@Url.Content(att.FileUrl)" alt="" />
+                }
+            }
+        </div>
+    </div>*@

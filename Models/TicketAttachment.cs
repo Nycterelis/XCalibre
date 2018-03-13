@@ -12,7 +12,7 @@ namespace XCalibre.Models
         public string Body { get; set; }
         public DateTimeOffset Created { get; set; }
         public string UserId { get; set; }
-        public string FilreUrl { get; set; }
+        public string FileUrl { get; set; }
 
         public virtual Ticket Ticket { get; set; }
         public virtual ApplicationUser User { get; set; }

@@ -1,0 +1,13 @@
+{
+  "ExpandedNodes": [
+    "\\App_Start",
+    "\\Controllers",
+    "\\Models",
+    "\\Models\\Helpers",
+    "\\Views",
+    "\\Views\\Projects",
+    "\\Views\\Shared",
+    "\\Views\\Tickets"
+  ],
+  "PreviewInSolutionExplorer": false
+}

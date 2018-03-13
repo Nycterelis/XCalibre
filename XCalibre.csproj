@@ -1107,6 +1107,7 @@
     <Content Include="Scripts\modernizr-2.6.2.js" />
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
+    <Content Include="Uploads\wallhaven-573091.jpg" />
     <Content Include="Views\index.html" />
     <Content Include="Views\layouts-dark-lefbar.html" />
     <Content Include="Views\tables-datatable.html" />
@@ -1208,6 +1209,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Views\Assets Views\" />
     <Folder Include="Views\NewFolder1\" />
   </ItemGroup>
   <ItemGroup>

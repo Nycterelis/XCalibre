@@ -14,6 +14,7 @@
 @if (User.IsInRole("ProjectManager"))
 {
     @Html.ActionLink("My Managed Projects", "MyManagedProjects", "UserPersonal", new { userId = User.Identity.GetUserId() }, null) <br />
+    
 
 }
 <!--What the Submitter Role Can See-->
@@ -22,7 +23,10 @@
     @Html.ActionLink("My Submitted Tickets", "MySubmittedTickets", "UserPersonal", new { userId = User.Identity.GetUserId() }, null) <br />
 
 }
-
+@if (User.IsInRole("Admin"))
+{
+    @Html.ActionLink("Edit User Roles", "Index", "AdminUserView", null, null)
+}
 @Html.ActionLink("All Projects", "Index", "Projects", new { userId = User.Identity.GetUserId() }, null) |
 @Html.ActionLink("All Tickets", "Index", "Tickets", new { userId = User.Identity.GetUserId() }, null)
 

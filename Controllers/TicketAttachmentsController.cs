@@ -59,7 +59,7 @@ namespace XCalibre.Controllers
                 {
                     var fileName = Path.GetFileName(image.FileName);
                     image.SaveAs(Path.Combine(Server.MapPath("~/Uploads/"), fileName));
-                    ticketAttachment.FilreUrl = "/Uploads/" + fileName;
+                    ticketAttachment.FileUrl = "/Uploads/" + fileName;
                 }
                 db.TicketAttachments.Add(ticketAttachment);
                 db.SaveChanges();

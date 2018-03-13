@@ -1,4 +1,3 @@
-D:\Projects\XCalibre\XCalibre\obj\Debug\XCalibre.csproj.CoreCompileInputs.cache
 D:\Projects\XCalibre\XCalibre\bin\ApplicationInsights.config
 D:\Projects\XCalibre\XCalibre\bin\XCalibre.dll.config
 D:\Projects\XCalibre\XCalibre\bin\XCalibre.dll
@@ -29,6 +28,9 @@ D:\Projects\XCalibre\XCalibre\bin\Microsoft.Owin.Security.Twitter.dll
 D:\Projects\XCalibre\XCalibre\bin\Microsoft.Web.Infrastructure.dll
 D:\Projects\XCalibre\XCalibre\bin\Newtonsoft.Json.dll
 D:\Projects\XCalibre\XCalibre\bin\Owin.dll
+D:\Projects\XCalibre\XCalibre\bin\PagedList.dll
+D:\Projects\XCalibre\XCalibre\bin\PagedList.Mvc.dll
+D:\Projects\XCalibre\XCalibre\bin\SendGrid.dll
 D:\Projects\XCalibre\XCalibre\bin\System.Web.Helpers.dll
 D:\Projects\XCalibre\XCalibre\bin\System.Web.Mvc.dll
 D:\Projects\XCalibre\XCalibre\bin\System.Web.Optimization.dll
@@ -38,6 +40,11 @@ D:\Projects\XCalibre\XCalibre\bin\System.Web.WebPages.dll
 D:\Projects\XCalibre\XCalibre\bin\System.Web.WebPages.Razor.dll
 D:\Projects\XCalibre\XCalibre\bin\WebGrease.dll
 D:\Projects\XCalibre\XCalibre\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
+D:\Projects\XCalibre\XCalibre\bin\Newtonsoft.Json.xml
+D:\Projects\XCalibre\XCalibre\bin\PagedList.xml
+D:\Projects\XCalibre\XCalibre\bin\PagedList.Mvc.xml
+D:\Projects\XCalibre\XCalibre\bin\SendGrid.pdb
+D:\Projects\XCalibre\XCalibre\bin\SendGrid.xml
 D:\Projects\XCalibre\XCalibre\bin\System.Web.Helpers.xml
 D:\Projects\XCalibre\XCalibre\bin\System.Web.Mvc.xml
 D:\Projects\XCalibre\XCalibre\bin\System.Web.Optimization.xml
@@ -46,7 +53,6 @@ D:\Projects\XCalibre\XCalibre\bin\System.Web.WebPages.xml
 D:\Projects\XCalibre\XCalibre\bin\System.Web.WebPages.Deployment.xml
 D:\Projects\XCalibre\XCalibre\bin\System.Web.WebPages.Razor.xml
 D:\Projects\XCalibre\XCalibre\bin\Antlr3.Runtime.pdb
-D:\Projects\XCalibre\XCalibre\bin\Newtonsoft.Json.xml
 D:\Projects\XCalibre\XCalibre\bin\EntityFramework.xml
 D:\Projects\XCalibre\XCalibre\bin\EntityFramework.SqlServer.xml
 D:\Projects\XCalibre\XCalibre\bin\Microsoft.AspNet.Identity.Core.xml
@@ -66,14 +72,8 @@ D:\Projects\XCalibre\XCalibre\bin\Microsoft.AI.DependencyCollector.xml
 D:\Projects\XCalibre\XCalibre\bin\Microsoft.AI.ServerTelemetryChannel.xml
 D:\Projects\XCalibre\XCalibre\bin\Microsoft.AI.WindowsServer.xml
 D:\Projects\XCalibre\XCalibre\bin\Microsoft.AI.Web.xml
+D:\Projects\XCalibre\XCalibre\obj\Debug\XCalibre.csprojResolveAssemblyReference.cache
+D:\Projects\XCalibre\XCalibre\obj\Debug\XCalibre.csproj.CoreCompileInputs.cache
+D:\Projects\XCalibre\XCalibre\obj\Debug\XCalibre.csproj.CopyComplete
 D:\Projects\XCalibre\XCalibre\obj\Debug\XCalibre.dll
 D:\Projects\XCalibre\XCalibre\obj\Debug\XCalibre.pdb
-D:\Projects\XCalibre\XCalibre\obj\Debug\XCalibre.csprojResolveAssemblyReference.cache
-D:\Projects\XCalibre\XCalibre\bin\SendGrid.dll
-D:\Projects\XCalibre\XCalibre\bin\SendGrid.pdb
-D:\Projects\XCalibre\XCalibre\bin\SendGrid.xml
-D:\Projects\XCalibre\XCalibre\bin\PagedList.dll
-D:\Projects\XCalibre\XCalibre\bin\PagedList.Mvc.dll
-D:\Projects\XCalibre\XCalibre\bin\PagedList.xml
-D:\Projects\XCalibre\XCalibre\bin\PagedList.Mvc.xml
-D:\Projects\XCalibre\XCalibre\obj\Debug\XCalibre.csproj.CopyComplete
