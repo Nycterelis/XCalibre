@@ -78,11 +78,9 @@ namespace XCalibre.Models.Helpers
             {
                 var prj = db.Projects.Find(ProjectId);
                 var pm = UserId;
-                if (!db.Projects.Any(u => u.PmId == pm))
-                {
-                    prj.PmId = pm;
-                    db.SaveChanges();
-                }
+                prj.PmId = pm;
+                db.SaveChanges();
+
                 return null;
             }
             catch (Exception ex)
@@ -91,7 +89,7 @@ namespace XCalibre.Models.Helpers
                 return ex;
             }
         }
-       
+
         public Exception RemoveUserToProject(string UserId, int ProjectId)
         {
             try
@@ -143,5 +141,6 @@ namespace XCalibre.Models.Helpers
             return usersNotOnProjects;
         }
 
+        
     }
 }

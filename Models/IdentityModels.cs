@@ -13,6 +13,7 @@ namespace XCalibre.Models
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public string FullName { get; set; }
+        public string ProfilePicture { get; set; }
 
 
         public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<ApplicationUser> manager)
@@ -20,8 +21,12 @@ namespace XCalibre.Models
             // Note the authenticationType must match the one defined in CookieAuthenticationOptions.AuthenticationType
             var userIdentity = await manager.CreateIdentityAsync(this, DefaultAuthenticationTypes.ApplicationCookie);
             // Add custom user claims here
+            userIdentity.AddClaim(new Claim("Name", FullName));
+            userIdentity.AddClaim(new Claim("Picture", ProfilePicture));
+
             return userIdentity;
         }
+        
         //There is not an Icollection to tickets because we've defined two users (OwnerUser and AssignedToUser); ASPNet will sort it out for us.
         //But if we reference the Ticket Model here it will make additional Users and Break code. 
         public virtual ICollection<TicketComment> TicketComments { get; set; }

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Web;
@@ -7,12 +8,15 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using XCalibre.Models;
+using XCalibre.Models.Helpers;
 
 namespace XCalibre.Controllers
 {
     [Authorize]
+    [RequireHttps]
     public class ManageController : Controller
     {
+        private ApplicationDbContext db = new ApplicationDbContext();
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
 
@@ -331,6 +335,37 @@ namespace XCalibre.Controllers
             }
 
             base.Dispose(disposing);
+        }
+        
+        //GET: Profile Picture
+        public ActionResult ProfilePicture()
+        {
+            return View();
+        }
+        
+        //Uploading a Profile Picture
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> ProfilePicture(AddProfilePictureViewModel model, HttpPostedFileBase image)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(model);
+            }
+                if (ImageUploadValidator.IsWebFriendlyImage(image))
+                {
+                    var fileName = Path.GetFileName(image.FileName);
+                    image.SaveAs(Path.Combine(Server.MapPath("~/Uploads/"), fileName));
+                    model.ProfilePicture = "/Uploads/" + fileName;
+                }
+            var user = db.Users.Find(User.Identity.GetUserId());
+            user.ProfilePicture = model.ProfilePicture;
+
+            db.SaveChanges();
+            await ControllerContext.HttpContext.RefreshAuthentication(user);
+
+
+            return RedirectToAction("Index", "Home");
         }
 
 #region Helpers

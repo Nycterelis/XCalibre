@@ -14,14 +14,11 @@
 @if (User.IsInRole("ProjectManager"))
 {
     @Html.ActionLink("My Managed Projects", "MyManagedProjects", "UserPersonal", new { userId = User.Identity.GetUserId() }, null) <br />
-    
-
 }
 <!--What the Submitter Role Can See-->
 @if (User.IsInRole("Submitter"))
 {
     @Html.ActionLink("My Submitted Tickets", "MySubmittedTickets", "UserPersonal", new { userId = User.Identity.GetUserId() }, null) <br />
-
 }
 @if (User.IsInRole("Admin"))
 {

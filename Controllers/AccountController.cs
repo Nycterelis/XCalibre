@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Globalization;
+using System.IO;
 using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
@@ -9,10 +10,12 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using XCalibre.Models;
+using XCalibre.Models.Helpers;
 
 namespace XCalibre.Controllers
 {
     [Authorize]
+    [RequireHttps]
     public class AccountController : Controller
     {
         private ApplicationSignInManager _signInManager;
@@ -147,11 +150,17 @@ namespace XCalibre.Controllers
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Register(RegisterViewModel model)
+        public async Task<ActionResult> Register(RegisterViewModel model, HttpPostedFileBase image)
         {
             if (ModelState.IsValid)
             {
-                var user = new ApplicationUser { UserName = model.Email, Email = model.Email, FirstName = model.FirstName, LastName = model.LastName, FullName = model.FirstName+" "+model.LastName };
+                if (ImageUploadValidator.IsWebFriendlyImage(image))
+                {
+                    var fileName = Path.GetFileName(image.FileName);
+                    image.SaveAs(Path.Combine(Server.MapPath("~/Uploads/"), fileName));
+                    model.ProfilePicture = "/Uploads/" + fileName;
+                }
+                var user = new ApplicationUser { ProfilePicture = model.ProfilePicture, UserName = model.Email, Email = model.Email, FirstName = model.FirstName, LastName = model.LastName, FullName = model.FirstName+" "+model.LastName };
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
@@ -165,6 +174,7 @@ namespace XCalibre.Controllers
 
                     return RedirectToAction("Index", "Home");
                 }
+                
                 AddErrors(result);
             }
 

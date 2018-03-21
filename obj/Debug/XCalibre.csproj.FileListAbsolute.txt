@@ -72,8 +72,8 @@ D:\Projects\XCalibre\XCalibre\bin\Microsoft.AI.DependencyCollector.xml
 D:\Projects\XCalibre\XCalibre\bin\Microsoft.AI.ServerTelemetryChannel.xml
 D:\Projects\XCalibre\XCalibre\bin\Microsoft.AI.WindowsServer.xml
 D:\Projects\XCalibre\XCalibre\bin\Microsoft.AI.Web.xml
-D:\Projects\XCalibre\XCalibre\obj\Debug\XCalibre.csprojResolveAssemblyReference.cache
 D:\Projects\XCalibre\XCalibre\obj\Debug\XCalibre.csproj.CoreCompileInputs.cache
 D:\Projects\XCalibre\XCalibre\obj\Debug\XCalibre.csproj.CopyComplete
 D:\Projects\XCalibre\XCalibre\obj\Debug\XCalibre.dll
 D:\Projects\XCalibre\XCalibre\obj\Debug\XCalibre.pdb
+D:\Projects\XCalibre\XCalibre\obj\Debug\XCalibre.csprojResolveAssemblyReference.cache

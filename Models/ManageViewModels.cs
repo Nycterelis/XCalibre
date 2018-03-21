@@ -83,4 +83,10 @@ namespace XCalibre.Models
         public string SelectedProvider { get; set; }
         public ICollection<System.Web.Mvc.SelectListItem> Providers { get; set; }
     }
+    public class AddProfilePictureViewModel
+    {
+        [Display(Name = "Profile Picture")]
+        public string ProfilePicture { get; set; }
+
+    }
 }

@@ -18,6 +18,7 @@ using PagedList.Mvc;
 namespace XCalibre.Controllers
 {
     [AllowAnonymous]
+    [RequireHttps]
     public class AdminUserViewController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();

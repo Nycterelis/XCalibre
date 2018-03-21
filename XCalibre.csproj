@@ -19,7 +19,7 @@
     <MvcBuildViews>false</MvcBuildViews>
     <UseIISExpress>true</UseIISExpress>
     <Use64BitIISExpress />
-    <IISExpressSSLPort />
+    <IISExpressSSLPort>44329</IISExpressSSLPort>
     <IISExpressAnonymousAuthentication />
     <IISExpressWindowsAuthentication />
     <IISExpressUseClassicPipelineMode />
@@ -221,12 +221,14 @@
     <Compile Include="Models\AdminProjectViewModel.cs" />
     <Compile Include="Models\AdminUserViewModel.cs" />
     <Compile Include="Models\Helpers\Email.cs" />
+    <Compile Include="Models\Helpers\Extensions.cs" />
     <Compile Include="Models\Helpers\ImageUploadValidator.cs" />
     <Compile Include="Models\Helpers\ProjectHelper.cs" />
     <Compile Include="Models\Helpers\UserRoleHelper.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\Project.cs" />
+    <Compile Include="Models\ProjectViewModel.cs" />
     <Compile Include="Models\Ticket.cs" />
     <Compile Include="Models\TicketAttachment.cs" />
     <Compile Include="Models\TicketComment.cs" />
@@ -919,7 +921,9 @@
     <Content Include="ApplicationInsights.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="private.config" />
+    <Content Include="private.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="assets\css\icons.css.map" />
     <Content Include="assets\css\style.css.map" />
     <Content Include="assets\css\style_cl.css.map" />
@@ -1108,9 +1112,7 @@
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
     <Content Include="Uploads\wallhaven-573091.jpg" />
-    <Content Include="Views\index.html" />
-    <Content Include="Views\layouts-dark-lefbar.html" />
-    <Content Include="Views\tables-datatable.html" />
+    <Content Include="Views\Assets Views\extras-profile.html" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
@@ -1120,7 +1122,9 @@
     <Content Include="Web.Release.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>
-    <Content Include="Views\Web.config" />
+    <Content Include="Views\Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
@@ -1206,10 +1210,11 @@
     <Content Include="Views\AdminProjectView\EditProjectManager.cshtml" />
     <Content Include="Views\UserPersonal\MyManagedProjects.cshtml" />
     <Content Include="Views\Shared\_CommPart.cshtml" />
+    <Content Include="Views\Manage\ProfilePicture.cshtml" />
+    <Content Include="Views\UserPersonal\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\Assets Views\" />
     <Folder Include="Views\NewFolder1\" />
   </ItemGroup>
   <ItemGroup>
@@ -1243,7 +1248,7 @@
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>64952</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>http://localhost:64952/</IISUrl>
+          <IISUrl>https://localhost:44329/</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>

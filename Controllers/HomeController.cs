@@ -10,6 +10,7 @@ using XCalibre.Models.Helpers;
 
 namespace XCalibre.Controllers
 {
+    [RequireHttps]
     public class HomeController : Controller
     {
         public ActionResult Index()

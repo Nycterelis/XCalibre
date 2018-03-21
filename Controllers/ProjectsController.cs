@@ -11,6 +11,7 @@ using XCalibre.Models.Helpers;
 
 namespace XCalibre.Controllers
 {
+    [RequireHttps]
     public class ProjectsController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();
@@ -19,14 +20,18 @@ namespace XCalibre.Controllers
         [Authorize]
         public ActionResult Index()
         {
-             
-            //ProjectHelper helper = new ProjectHelper();
+            List<ProjectViewModel> vm = new List<ProjectViewModel>();
+            foreach(var proj in db.Projects.ToList())
+            {
+                ProjectViewModel viewmodel = new ProjectViewModel();
+                viewmodel.Project = proj;
+                viewmodel.ProjectManager = db.Users.Find(proj.PmId);
+                vm.Add(viewmodel);
+            }
 
-            //if (User.IsInRole("Admin, ProjectManager"))
-            //{
-            //    return View(db.Projects.ToList());
-            //}
-            return View(db.Projects.ToList());
+            
+            
+            return View(vm);
         }
 
         // GET: Projects/Details/5

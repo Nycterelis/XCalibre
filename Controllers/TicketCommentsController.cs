@@ -11,6 +11,7 @@ using XCalibre.Models;
 
 namespace XCalibre.Controllers
 {
+    [RequireHttps]
     public class TicketCommentsController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();
@@ -60,7 +61,7 @@ namespace XCalibre.Controllers
                 db.TicketComments.Add(ticketComment);
                 db.SaveChanges();
                 var tkt = db.Tickets.Find(ticketComment.TicketId);
-                return RedirectToAction("Index", "Tickets", null);
+                return RedirectToAction("Details", "Tickets", new { id = tkt.Id });
             }
 
             ViewBag.TicketId = new SelectList(db.Tickets, "Id", "Title", ticketComment.TicketId);

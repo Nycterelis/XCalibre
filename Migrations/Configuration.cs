@@ -108,7 +108,17 @@ namespace XCalibre.Migrations
                 userManager.Create(user, "Abc&123!");
                 userManager.AddToRole(user.Id, "Submitter");
             }
-
+            if (!context.Users.Any(u => u.Email == "Unassigned@placeholder.com"))
+            {
+                var user = new ApplicationUser
+                {
+                    UserName = "Unassigned@placeholder.com",
+                    Email = "Unassignedsubmitter@placeholder.com",
+                    FirstName = "Unassigned",
+                    LastName = "Unassigned"
+                };
+                userManager.Create(user, "Abc&123!");
+            }
             //Seeding the Ticket Statuses Below
             if (!context.TicketStatuses.Any(s => s.Name == "New"))
             {

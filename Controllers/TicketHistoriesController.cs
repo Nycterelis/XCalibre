@@ -10,6 +10,7 @@ using XCalibre.Models;
 
 namespace XCalibre.Controllers
 {
+    [RequireHttps]
     public class TicketHistoriesController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();

@@ -1,4 +1,6 @@
 ﻿@model IEnumerable<XCalibre.Models.TicketHistory>
+    @using XCalibre.Models;
+
 
 @{
     ViewBag.Title = "Index";
@@ -44,13 +46,17 @@
             @Html.DisplayFor(modelItem => item.Property)
         </td>
         <td>
+            
             @Html.DisplayFor(modelItem => item.OldValue)
         </td>
+        
         <td>
             @Html.DisplayFor(modelItem => item.NewValue)
+            
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.Changed)
+            
         </td>
         <td>
             @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |

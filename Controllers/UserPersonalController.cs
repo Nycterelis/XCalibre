@@ -9,9 +9,18 @@ using XCalibre.Models;
 
 namespace XCalibre.Controllers
 {
+    [RequireHttps]
     public class UserPersonalController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();
+
+        //GET: Index
+        [Authorize]
+        public ActionResult Index()
+        {
+            var userId = User.Identity.GetUserId();
+            return View();
+        }
 
         // GET: My Projects
         //Gets projects that a user is assigned to 

@@ -1,0 +1,24 @@
+﻿@model XCalibre.Models.AddProfilePictureViewModel
+@{
+    ViewBag.Title = "ProfilePicture";
+}
+
+<h2>Profile Picture</h2>
+@using (Html.BeginForm("ProfilePicture", "Manage", FormMethod.Post, new { enctype = "Multipart/form-data" }))
+{
+@Html.AntiForgeryToken()
+
+    <div class="form-group">
+        @Html.LabelFor(m => m.ProfilePicture, new { @class = "col-md-2 control-label" })
+        <div class="col-md-10">
+            <input type="file" name="image" class="form-control" />
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" class="btn btn-default" value="Submit" />
+        </div>
+    </div>
+
+}
+

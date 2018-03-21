@@ -8,6 +8,7 @@ using XCalibre.Models.Helpers;
 
 namespace XCalibre.Controllers
 {
+    [RequireHttps]
     public class AdminProjectViewController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();

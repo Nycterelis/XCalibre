@@ -34,7 +34,7 @@ namespace XCalibre
             var host = WebConfigurationManager.AppSettings["host"];
             int port = Convert.ToInt32(WebConfigurationManager.AppSettings["port"]);
 
-            var from = new MailAddress(WebConfigurationManager.AppSettings["emailfrom"], "XCalibre");
+            var from = new MailAddress(WebConfigurationManager.AppSettings["emailfrom"]);
 
             //Email object set up
             var email = new MailMessage(from, new MailAddress(message.Destination))
