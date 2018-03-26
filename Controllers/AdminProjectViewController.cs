@@ -13,18 +13,6 @@ namespace XCalibre.Controllers
     {
         private ApplicationDbContext db = new ApplicationDbContext();
 
-        // GET: AdminProjectView
-        //public ActionResult Index()
-        //{
-        //    ProjectHelper helper = new ProjectHelper();
-        //    var projectModelList = new List<AdminProjectViewModel>();
-
-        //    IList<string> selected = new List<string>();
-
-        //    foreach (var p in )
-        //        return View();
-        //}
-
         //GET EditProjectUser
         [Authorize(Roles = "Admin, ProjectManager")]
         public ActionResult EditProjectUser(int id)

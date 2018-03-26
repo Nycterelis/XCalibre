@@ -23,6 +23,8 @@
 <p>
 
     @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Close Project", "Delete", new { id = Model.Id }) |
+    @Html.ActionLink("Submit New Ticket", "Create", "Tickets", new { projectId = Model.Id }, null)
     @*@Html.ActionLink("Back to List", "Index", new { id = Model.Users } )*@
 </p>
 <div class="row">

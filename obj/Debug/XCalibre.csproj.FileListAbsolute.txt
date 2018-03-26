@@ -77,3 +77,4 @@ D:\Projects\XCalibre\XCalibre\obj\Debug\XCalibre.csproj.CopyComplete
 D:\Projects\XCalibre\XCalibre\obj\Debug\XCalibre.dll
 D:\Projects\XCalibre\XCalibre\obj\Debug\XCalibre.pdb
 D:\Projects\XCalibre\XCalibre\obj\Debug\XCalibre.csprojResolveAssemblyReference.cache
+D:\Projects\XCalibre\XCalibre\bin\MathParser.org-mXparser.Net461.dll

@@ -72,6 +72,20 @@ namespace XCalibre.Migrations
                 userManager.Create(user, "Abc&123!");
                 userManager.AddToRoles(user.Id, new string[] { "Admin" });
             }
+            if (!context.Users.Any(u => u.Email == "Admin@placeholder.com"))
+            {
+                var user = new ApplicationUser
+                {
+                    UserName = "Admin@placeholder.com",
+                    Email = "Admin@placeholder.com",
+                    FirstName = "Admin",
+                    LastName = "Placeholder",
+                    FullName = "Admin Placeholder"
+                };
+                userManager.Create(user, "Abc&123!");
+                userManager.AddToRoles(user.Id, new string[] { "Admin" });
+            }
+
             if (!context.Users.Any(u => u.Email == "prjmgr@placeholder.com"))
             {
                 var user = new ApplicationUser
@@ -79,7 +93,8 @@ namespace XCalibre.Migrations
                     UserName = "prjmgr@placeholder.com",
                     Email = "prjmgr@placeholder.com",
                     FirstName = "ProjectManager",
-                    LastName = "PlaceHolder"
+                    LastName = "PlaceHolder",
+                    FullName = "ProjectManager PlaceHolder"
                 };
                 userManager.Create(user, "Abc&123!");
                 userManager.AddToRole(user.Id, "ProjectManager");
@@ -91,7 +106,8 @@ namespace XCalibre.Migrations
                     UserName = "developer@placeholder.com",
                     Email = "developer@placeholder.com",
                     FirstName = "Developer",
-                    LastName = "PlaceHolder"
+                    LastName = "PlaceHolder",
+                    FullName = "Developer PlaceHolder"
                 };
                 userManager.Create(user, "Abc&123!");
                 userManager.AddToRole(user.Id, "Developer");
@@ -103,7 +119,8 @@ namespace XCalibre.Migrations
                     UserName = "submitter@placeholder.com",
                     Email = "submitter@placeholder.com",
                     FirstName = "Submitter",
-                    LastName = "PlaceHolder"
+                    LastName = "PlaceHolder",
+                    FullName = "Submitter PlaceHolder"
                 };
                 userManager.Create(user, "Abc&123!");
                 userManager.AddToRole(user.Id, "Submitter");
@@ -115,7 +132,8 @@ namespace XCalibre.Migrations
                     UserName = "Unassigned@placeholder.com",
                     Email = "Unassignedsubmitter@placeholder.com",
                     FirstName = "Unassigned",
-                    LastName = "Unassigned"
+                    LastName = "Unassigned",
+                    FullName = "Unassigned Unassigned"
                 };
                 userManager.Create(user, "Abc&123!");
             }

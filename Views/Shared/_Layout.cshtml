@@ -70,7 +70,7 @@
                         <!--<li class="menu-title">Navigation</li>-->
 
                         <li>
-                            <a href="@Url.Action("Index", "Home")">
+                            <a href="@Url.Action("Dashboard", "Home")">
 
                                 <i class="fi-air-play"></i> <span> Dashboard </span>
                             </a>
@@ -89,9 +89,12 @@
                                     <li><a href=@Url.Action("MyManagedProjects", "UserPersonal", new { userId = User.Identity.GetUserId() })>My Managed Projects</a></li>
                                 }
 
-                                <li><a href=@Url.Action("Index", "Projects", null)>All Projects</a></li>
+                                <li><a href=@Url.Action("Index", "Projects", null)>Current Projects</a></li>
+                                <li><a href=@Url.Action("ClosedProjects", "Projects", null)>Finished Projects</a></li>
+                                <li><a href=@Url.Action("AllProjects", "Projects", null)>All Projects</a></li>
 
                             </ul>
+
                         </li>
                         <li>
                             <a href="javascript: void(0);"><i class="fi-paper"></i> <span> Tickets </span> <span class="menu-arrow"></span></a>
@@ -114,6 +117,7 @@
                             </ul>
                         </li>
 
+
                     </ul>
                 </div>
                 <div class="clearfix"></div>
@@ -122,32 +126,32 @@
         <div class="content-page">
 
 
-                    @Html.Partial("_LoginPartial")
+            @Html.Partial("_LoginPartial")
 
             @*<div class="topbar">
 
-                <nav class="navbar-custom">
-                    <ul class="list-unstyled topbar-right-menu float-right mb-0"></ul>
-                    <ul class="list-inline menu-left mb-0">
-                        <li class="float-left">
-                            <button class="button-menu-mobile open-left disable-btn">
-                                <i class="dripicons-menu"></i>
-                            </button>
-                        </li>
-                        <li>
-                            <div class="page-title-box">
-                                <h4 class="page-title">XCalibre</h4>
-                                <ol class="breadcrumb">
-                                        <li class="breadcrumb-item"><a href="#">Highdmin</a></li>
-                                        <li class="breadcrumb-item"><a href="#">Layouts</a></li>
-                                        <li class="breadcrumb-item active">Dark Menu</li>
-                                    </ol>
-                            </div>
-                        </li>
+                    <nav class="navbar-custom">
+                        <ul class="list-unstyled topbar-right-menu float-right mb-0"></ul>
+                        <ul class="list-inline menu-left mb-0">
+                            <li class="float-left">
+                                <button class="button-menu-mobile open-left disable-btn">
+                                    <i class="dripicons-menu"></i>
+                                </button>
+                            </li>
+                            <li>
+                                <div class="page-title-box">
+                                    <h4 class="page-title">XCalibre</h4>
+                                    <ol class="breadcrumb">
+                                            <li class="breadcrumb-item"><a href="#">Highdmin</a></li>
+                                            <li class="breadcrumb-item"><a href="#">Layouts</a></li>
+                                            <li class="breadcrumb-item active">Dark Menu</li>
+                                        </ol>
+                                </div>
+                            </li>
 
-                    </ul>
-                </nav>
-            </div>*@
+                        </ul>
+                    </nav>
+                </div>*@
             <div class="content">
                 <div class="container-fluid">
                     @RenderBody()
@@ -213,6 +217,9 @@
     <script src="~/assets/js/jquery.core.js"></script>
     <script src="~/assets/js/jquery.app.js"></script>
 
+    <script src="../plugins/custombox/js/custombox.min.js"></script>
+    <script src="../plugins/custombox/js/legacy.min.js"></script>
+
     <script type="text/javascript">
         $(document).ready(function () {
 
@@ -228,9 +235,20 @@
             $('#ProjectTickets').DataTable();
 
 
+
         });
 
     </script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+
+            $('#Histories').DataTable();
+
+
+        });
+
+    </script>
+
 
 
 </body>

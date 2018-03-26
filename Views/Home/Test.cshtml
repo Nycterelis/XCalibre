@@ -1,0 +1,82 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>XCalibre BugTracker</title>
+
+    <!-- App favicon -->
+    <link rel="shortcut icon" href="~/assets/images/favicon.ico">
+
+    <!-- DataTables -->
+
+    <link href="~/assets/plugins/datatables/dataTables.bootstrap4.min.css" rel="stylesheet" />
+    <link href="~/assets/plugins/datatables/buttons.bootstrap4.min.css" rel="stylesheet" />
+
+    <!-- Plugins css-->
+    <link href="../plugins/bootstrap-tagsinput/css/bootstrap-tagsinput.css" rel="stylesheet" />
+
+
+
+    <!-- App css -->
+    <link href="~/assets/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <link href="~/assets/css/icons.css" rel="stylesheet" type="text/css" />
+    <link href="~/assets/css/metismenu.min.css" rel="stylesheet" type="text/css" />
+    <link href="~/assets/css/style_dark.css" rel="stylesheet" type="text/css" />
+
+    <script src="~/assets/js/modernizr.min.js"></script>
+
+</head>
+<body>
+    <section id="comingsoon">
+        <div class="overlayhome">
+            <div class="text-center">
+                <div class="content-text">
+                    <h2>
+                        @Html.ActionLink("Register", "Register", "Account", routeValues: null, htmlAttributes: new { id = "registerLink" })
+                        @Html.ActionLink("Log in", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink" })
+                    </h2>
+                    <h2>
+                        @Html.ActionLink("Login As Guest Admin", "GuestLogin", new { ReturnUrl = ViewBag.ReturnUrl, type = "Admin" }, new { @class = "btn btn-primary" })
+                        @Html.ActionLink("Login As Guest Project Manager", "GuestLogin", new { ReturnUrl = ViewBag.ReturnUrl, type = "ProjectManager" }, new { @class = "btn btn-primary" })
+                        @Html.ActionLink("Login As Guest Developer", "GuestLogin", new { ReturnUrl = ViewBag.ReturnUrl, type = "Developer" }, new { @class = "btn btn-primary" })
+                        @Html.ActionLink("Login As Guest Submitter", "GuestLogin", new { ReturnUrl = ViewBag.ReturnUrl, type = "Submitter" }, new { @class = "btn btn-primary" })
+                    </h2>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!--=======================================
+                   Script
+    ==========================================-->
+    <!-- jQuery  -->
+    <script src="~/assets/js/jquery.min.js"></script>
+    <script src="~/assets/js/popper.min.js"></script>
+    <script src="~/assets/js/bootstrap.min.js"></script>
+    <script src="~/assets/js/metisMenu.min.js"></script>
+    <script src="~/assets/js/waves.js"></script>
+    <script src="~/assets/js/jquery.slimscroll.js"></script>
+
+    <!-- Buttons examples -->
+    <script src="~/assets/plugins/datatables/dataTables.buttons.min.js"></script>
+    <script src="~/assets/plugins/datatables/buttons.bootstrap4.min.js"></script>
+    <script src="~/assets/plugins/datatables/jszip.min.js"></script>
+    <script src="~/assets/plugins/datatables/pdfmake.min.js"></script>
+    <script src="~/assets/plugins/datatables/vfs_fonts.js"></script>
+    <script src="~/assets/plugins/datatables/buttons.html5.min.js"></script>
+    <script src="~/assets/plugins/datatables/buttons.print.min.js"></script>
+
+    <!-- App js -->
+    <script src="~/assets/js/jquery.core.js"></script>
+    <script src="~/assets/js/jquery.app.js"></script>
+
+    <script src="../plugins/custombox/js/custombox.min.js"></script>
+    <script src="../plugins/custombox/js/legacy.min.js"></script>
+</body>
+</html>

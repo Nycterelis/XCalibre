@@ -21,7 +21,7 @@ namespace XCalibre.Controllers
         public ActionResult Index()
         {
             List<ProjectViewModel> vm = new List<ProjectViewModel>();
-            foreach(var proj in db.Projects.ToList())
+            foreach(var proj in db.Projects.Where(c => c.Closed == false).ToList())
             {
                 ProjectViewModel viewmodel = new ProjectViewModel();
                 viewmodel.Project = proj;
@@ -31,6 +31,46 @@ namespace XCalibre.Controllers
 
             
             
+            return View(vm);
+        }
+
+        // GET: All Projects
+        [Authorize]
+        public ActionResult AllProjects()
+        {
+            List<ProjectViewModel> vm = new List<ProjectViewModel>();
+            var projects = db.Projects.Where(c => c.Closed == true).ToList().OrderBy(n => n.Name);
+            var openProjects = db.Projects.Where(c => c.Closed == false).ToList().OrderBy(n => n.Name);
+            var allProjects = openProjects.Union(projects);
+            //foreach (var proj in db.Projects.ToList().OrderBy(c => c.Closed).OrderBy(n => n.Name))
+            foreach (var proj in allProjects)
+            {
+                ProjectViewModel viewmodel = new ProjectViewModel();
+                viewmodel.Project = proj;
+                viewmodel.ProjectManager = db.Users.Find(proj.PmId);
+                vm.Add(viewmodel);
+            }
+
+
+
+            return View(vm);
+        }
+
+        // GET: Closed Projects
+        [Authorize]
+        public ActionResult ClosedProjects()
+        {
+            List<ProjectViewModel> vm = new List<ProjectViewModel>();
+            foreach (var proj in db.Projects.Where(c => c.Closed == true).ToList())
+            {
+                ProjectViewModel viewmodel = new ProjectViewModel();
+                viewmodel.Project = proj;
+                viewmodel.ProjectManager = db.Users.Find(proj.PmId);
+                vm.Add(viewmodel);
+            }
+
+
+
             return View(vm);
         }
 
@@ -130,7 +170,13 @@ namespace XCalibre.Controllers
         public ActionResult DeleteConfirmed(int id)
         {
             Project project = db.Projects.Find(id);
-            db.Projects.Remove(project);
+            //db.Projects.Remove(project);
+            project.Closed = true;
+            var proj = project.Tickets;
+            foreach (var tick in proj)
+            {
+                tick.Closed = true;
+            }
             db.SaveChanges();
             return RedirectToAction("Index");
         }

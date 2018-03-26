@@ -461,6 +461,52 @@ namespace XCalibre.Controllers
 
             base.Dispose(disposing);
         }
+        //Demo Logins
+        [AllowAnonymous]
+        public async Task<ActionResult> GuestLogin(string returnUrl, string type)
+        {
+            string Email = "";
+            string Password = "";
+
+            switch (type)
+            {
+                case "Admin":
+                    Email = "admin@placeholder.com";
+                    Password = "Abc&123!";
+                    break;
+                case "ProjectManager":
+                    Email = "prjmgr@placeholder.com";
+                    Password = "Abc&123!";
+                    break;
+                case "Developer":
+                    Email = "developer@placeholder.com";
+                    Password = "Abc&123!";
+                    break;
+                case "Submitter":
+                    Email = "submitter@placeholder.com";
+                    Password = "Abc&123!";
+                    break;
+                default:
+                    Email = "submitter@placeholder.com";
+                    Password = "Abc&123!";
+                    break;
+            }
+            var result = await SignInManager.PasswordSignInAsync(Email, Password, false, shouldLockout: false);
+            switch (result)
+            {
+                case SignInStatus.Success:
+                    return RedirectToAction("Index", "Tickets");
+                //return RedirectToLocal(returnUrl);
+                case SignInStatus.LockedOut:
+                    return View("Lockout");
+                case SignInStatus.RequiresVerification:
+                    return RedirectToAction("SendCode", new { ReturnUrl = returnUrl, RememberMe = false });
+                case SignInStatus.Failure:
+                default:
+                    ModelState.AddModelError("", "Invalid login attempt.");
+                    return RedirectToAction("Login");
+            }
+        }
 
         #region Helpers
         // Used for XSRF protection when adding external logins

@@ -1,0 +1,138 @@
+﻿@using Microsoft.AspNet.Identity;
+@using XCalibre.Models.Helpers;
+@using System.Threading.Tasks;
+@using System.Data;
+
+
+@model IEnumerable<XCalibre.Models.ProjectViewModel>
+
+@{
+    ViewBag.Title = "Projects";
+}
+<div class="row">
+    <div class="col-sm-4">
+        <a class="btn btn-custom btn-rounded w-md waves-effect waves-light mb-4" href=@Url.Action("Create")><i class="mdi mdi-plus-circle"></i> Create Project</a>
+    </div>
+    <div class="col-sm-8">
+        <div class="project-sort pull-right">
+            <div class="project-sort-item">
+                <form class="form-inline">
+                    <div class="form-group">
+                        <label for="phase-select">Phase :</label>
+                        <select class="form-control ml-2 form-control-sm" id="phase-select">
+                            <option>All Projects(6)</option>
+                            <option>Complated</option>
+                            <option>Progress</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="sort-select">Sort :</label>
+                        <select class="form-control ml-2 form-control-sm" id="sort-select">
+                            <option>Date</option>
+                            <option>Name</option>
+                            <option>End date</option>
+                            <option>Start Date</option>
+                        </select>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div><!-- end col-->
+</div>
+
+
+
+<div class="row">
+    @foreach (var item in Model)
+    {
+        <div class="col-xl-4">
+            <div class="card-box project-box ribbon-box">
+                @if (item.Project.Closed == true)
+                {
+                    <div class="ribbon-two ribbon-two-dark"><span>Closed</span></div>
+
+                }
+                <div class="dropdown pull-right">
+                    <a href="#" class="dropdown-toggle card-drop arrow-none" data-toggle="dropdown" aria-expanded="false">
+                        <h3 class="m-0 text-muted"><i class="mdi mdi-dots-horizontal"></i></h3>
+                    </a>
+                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="btnGroupDrop1">
+                        <a class="dropdown-item" href=@Url.Action("Edit", new { id = item.Project.Id})>Edit</a>
+                        <a class="dropdown-item" href=@Url.Action("Edit", new { id = item.Project.Id})>Delete</a>
+                        <a class="dropdown-item" href="@Url.Action("EditProjectUser", "AdminProjectView", new { id = item.Project.Id})">Edit Members</a>
+                        <a class="dropdown-item" href=@Url.Action("EditProjectManager", "AdminProjectView", new { id = item.Project.Id })>Assign Project Manager</a>
+                    </div>
+                </div>
+                <p class="text-muted text-uppercase mb-0 font-13">Company Name Goes Here</p>
+                <h4 class="mt-0 mb-3"><a href=@Url.Action("Details", new { id = item.Project.Id }) class="text-dark">@Html.DisplayFor(modelitem => item.Project.Name)</a></h4>
+                <p class="text-muted font-13">
+                    Projects currently do not possess a description or body property. If they did, it would go here. Should they? Consider implementing.
+                    @*<a href="#" class="font-600 text-muted">view more</a>*@
+                </p>
+
+
+                <ul class="list-inline">
+                    <li class="list-inline-item">
+                        <h3 class="mb-0">@item.Project.Tickets.SelectMany(a => a.Attachments).Count()</h3>
+                        <p class="text-muted">Attachments</p>
+                    </li>
+                    <li class="list-inline-item">
+                        <h3 class="mb-0">@item.Project.Tickets.SelectMany(c => c.Comments).Count()</h3>
+                        <p class="text-muted">Comments</p>
+                    </li>
+                    <li class="list-inline-item">
+                        <h3 class="mb-0">@item.Project.Tickets.Count</h3>
+                        <p class="text-muted">Tickets</p>
+                    </li>
+                </ul>
+
+                <div class="project-members mb-4">
+                    <label class="mr-3">Project Manager:</label>
+
+                    @{
+                        var fullname = item.ProjectManager != null ? item.ProjectManager.FullName : "";
+                        var picture = item.ProjectManager != null ? item.ProjectManager.ProfilePicture : "../assets/images/users/avatar-1.jpg";
+
+                    }
+                    <a href="#" data-toggle="tooltip" data-placement="top" title="" data-original-title=@fullname>
+                        <img src=@picture class="rounded-circle thumb-sm" alt="friend" />
+                    </a>
+                </div>
+                <div class="project-members mb-4">
+                    <label class="mr-3">Team :</label>
+                    @foreach (var user in item.Project.Users)
+                    {
+                        <a href="#" data-toggle="tooltip" data-placement="top" title="" data-original-title=@user.FullName>
+                            <img src=@user.ProfilePicture class="rounded-circle thumb-sm" alt="friend" />
+                        </a>
+
+                    }
+
+                </div>
+
+                <label class="">Tickets Resolved: <span class="text-custom">@item.Project.Tickets.Where(s => s.TicketStatusId == 6).Count()/@item.Project.Tickets.Count</span></label>
+                <div class="progress mb-1" style="height: 7px;">
+                @{ 
+                    var resolved = Convert.ToInt32(item.Project.Tickets.Where(s => s.TicketStatusId == 6).Count());
+                    var total = Convert.ToInt32(item.Project.Tickets.Count());
+                    var percent = 0;
+                    if (total != 0)
+                    {
+                        decimal ratio = Convert.ToDecimal(resolved) / Convert.ToDecimal(total);
+                        percent = Convert.ToInt32(ratio * 100);
+
+                    }
+                    
+
+
+                    <div class="progress-bar"
+                         role="progressbar" aria-valuenow=@resolved aria-valuemin="0" aria-valuemax=@total
+                         style="width: @percent%;">
+                    </div><!-- /.progress-bar .progress-bar-danger -->
+                }
+                </div><!-- /.progress .no-rounded -->
+
+            </div>
+        </div><!-- end col-->
+    }
+</div><!--Ends the Row?-->

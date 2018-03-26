@@ -30,18 +30,35 @@ namespace XCalibre.Controllers
                 _userManager = value;
             }
         }
-
+       
         // GET: Tickets
         [Authorize]
         public ActionResult Index()
         {
+            var tickets = db.Tickets.Where(c => c.Closed == false).Include(t => t.AssignedToUser).Include(t => t.OwnerUser).Include(t => t.Project).Include(t => t.TicketPriority).Include(t => t.TicketStatus).Include(t => t.TicketType);
+            return View(tickets.ToList());
+        }
+
+        // GET: Tickets
+        [Authorize]
+        public ActionResult AllTickets()
+        {
             var tickets = db.Tickets.Include(t => t.AssignedToUser).Include(t => t.OwnerUser).Include(t => t.Project).Include(t => t.TicketPriority).Include(t => t.TicketStatus).Include(t => t.TicketType);
+            return View(tickets.ToList());
+        }
+
+        // GET: Tickets
+        [Authorize]
+        public ActionResult ClosedTickets()
+        {
+            var tickets = db.Tickets.Where(c => c.Closed == true).Include(t => t.AssignedToUser).Include(t => t.OwnerUser).Include(t => t.Project).Include(t => t.TicketPriority).Include(t => t.TicketStatus).Include(t => t.TicketType);
             return View(tickets.ToList());
         }
 
         // GET: Tickets/Details/5
         public ActionResult Details(int? id)
         {
+
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -51,19 +68,20 @@ namespace XCalibre.Controllers
             {
                 return HttpNotFound();
             }
+
             return View(ticket);
         }
 
         // GET: Tickets/Create
         [Authorize(Roles = "Submitter, ProjectManager, Admin")]
-        public ActionResult Create()
+        public ActionResult Create(int projectId)
         {
-            ViewBag.AssignedToUserId = new SelectList(db.Users, "Id", "FirstName");
-            ViewBag.OwnerUserId = new SelectList(db.Users, "Id", "FirstName");
-            ViewBag.ProjectId = new SelectList(db.Projects, "Id", "Name");
+            //ViewBag.AssignedToUserId = new SelectList(db.Users, "Id", "FirstName");
+            //ViewBag.OwnerUserId = new SelectList(db.Users, "Id", "FirstName");
+            ViewBag.ProjectId = projectId;
             //ViewBag.TicketPriorityId = new SelectList(db.TicketPriorities, "Id", "Name");
-            ViewBag.TicketStatusId = new SelectList(db.TicketStatuses, "Id", "Name");
-
+            //ViewBag.TicketStatusId = new SelectList(db.TicketStatuses, "Id", "Name");
+            
             ViewBag.TicketTypeId = new SelectList(db.TicketTypes, "Id", "Name");
             return View();
         }
@@ -84,9 +102,10 @@ namespace XCalibre.Controllers
                 ticket.TicketPriorityId = db.TicketPriorities.First(i => i.Id == 5).Id;
                 ticket.OwnerUserId = User.Identity.GetUserId();
                 ticket.AssignedToUserId = db.Users.FirstOrDefault(n => n.FirstName == "Unassigned").Id;
+                
                 db.Tickets.Add(ticket);
                 db.SaveChanges();
-                //var thisTicket = db.Tickets.Where(i => i.Id == ticket.Id);
+                
                 var projectId = ticket.ProjectId;//The magic starts here
                 var projectManager = db.Projects.Find(projectId).PmId;
 
@@ -99,7 +118,7 @@ namespace XCalibre.Controllers
             //ViewBag.TicketPriorityId = new SelectList(db.TicketPriorities, "Id", "Name", ticket.TicketPriorityId);
             //ViewBag.TicketStatusId = new SelectList(db.TicketStatuses, "Id", "Name", ticket.TicketStatusId);
             // ViewBag.OwnerUserId = new SelectList(db.Users, "Id", "FirstName", ticket.OwnerUserId);
-            ViewBag.ProjectId = new SelectList(db.Projects, "Id", "Name", ticket.ProjectId);
+            //ViewBag.ProjectId = new SelectList(db.Projects, "Id", "Name", ticket.ProjectId);
             ViewBag.TicketTypeId = new SelectList(db.TicketTypes, "Id", "Name", ticket.TicketTypeId);
             return View(ticket);
         }
@@ -146,14 +165,14 @@ namespace XCalibre.Controllers
 
             if (ModelState.IsValid)
             {
-                //var model = db.Tickets.Find(ticket.Id);
+                
                 var oldTicket = db.Tickets.AsNoTracking().FirstOrDefault(t => t.Id == ticket.Id);
                 foreach (var prop in typeof(Ticket).GetProperties())
                 {
-                    if (prop.Name != null && prop.Name.In("Title", "Body", "TicketTypeId", "TicketPriorityId", "TicketStatusId", "AssignedToUserId"))
+                    if (prop.Name != null && prop.Name.In("Title", "Body", "TicketTypeId", "TicketPriorityId", "TicketStatusId"))
                     {
                         var oldInt = oldTicket.GetType().GetProperty(prop.Name).GetValue(oldTicket);
-                        var newInt = oldTicket.GetType().GetProperty(prop.Name).GetValue(ticket);
+                        var newInt = ticket.GetType().GetProperty(prop.Name).GetValue(ticket);
                         var oldValue = oldTicket.GetType().GetProperty(prop.Name).GetValue(oldTicket).ToString();
                         var newValue = ticket.GetType().GetProperty(prop.Name).GetValue(ticket).ToString();
 
@@ -172,7 +191,7 @@ namespace XCalibre.Controllers
                             oldValue = db.TicketPriorities.Find(oldInt).Name;
                             newValue = db.TicketPriorities.Find(newInt).Name;
                         }
-                        //if (!(ticket.GetType().GetField(prop.Name).GetValue(prop).Equals(model.GetType().GetProperty(prop.Name).GetValue(prop))
+
                         if (oldValue != newValue)
                         {
                             TicketHistory ticketHistory = new TicketHistory()
@@ -187,11 +206,11 @@ namespace XCalibre.Controllers
 
                             db.TicketHistories.Add(ticketHistory);
                             //If Block for Emails
-                            if (prop.Name == "AssignedToUserId")
-                            {
-                                await UserManager.SendEmailAsync(oldValue, "Ticket", "You have been removed from" + ticket.Title + ".");
-                                await UserManager.SendEmailAsync(newValue, "New Assignment", "You have been assigned to the ticket," + ticket.Title + ". Please login to view details.");
-                            };
+                            //if (prop.Name == "AssignedToUserId")
+                            //{
+                            //    await UserManager.SendEmailAsync(oldValue, "Ticket", "You have been removed from" + ticket.Title + ".");
+                            //    await UserManager.SendEmailAsync(newValue, "New Assignment", "You have been assigned to the ticket," + ticket.Title + ". Please login to view details.");
+                            //};
                             if (prop.Name == "TicketPriorityId")
                             {
                                 await UserManager.SendEmailAsync(ticket.AssignedToUserId, "New Ticket Priority", "One of your tickets have changed in priority. Please login to view details");
@@ -213,7 +232,66 @@ namespace XCalibre.Controllers
             ViewBag.TicketTypeId = new SelectList(db.TicketTypes, "Id", "Name", ticket.TicketTypeId);
             return View(ticket);
         }
-        //public ActionResult EditUser
+
+        //GET: Assigning a Developer to a ticket
+        [Authorize(Roles = "Admin, ProjectManager")]
+        public ActionResult EditUser(int? id)
+        {
+            UserRoleHelper helper = new UserRoleHelper();
+
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            Ticket ticket = db.Tickets.Find(id);
+            if (ticket == null)
+            {
+                return HttpNotFound();
+            }
+            ViewBag.AssignedToUserId = new SelectList(helper.UsersInRole("Developer"), "Id", "FirstName", ticket.AssignedToUserId);
+
+            return View();
+        }
+        //POST: Assigning a developer to a ticket
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Admin, ProjectManager")]
+        public async Task<ActionResult> EditUser([Bind(Include = "AssignedToUserId, SelectedUser, Id, Name")]Ticket ticket)
+        {
+            if (ModelState.IsValid)
+            {
+                var oldTicket = db.Tickets.AsNoTracking().FirstOrDefault(t => t.Id == ticket.Id);
+                var oldId = oldTicket.GetType().GetProperty("AssignedToUserId").GetValue(oldTicket);
+                var newId = oldTicket.GetType().GetProperty("AssignedToUserId").GetValue(ticket);
+                var oldValue = db.Users.Find(oldId).FullName;
+                var newValue = db.Users.Find(newId).FullName;
+                if (oldValue != newValue)
+                {
+                    TicketHistory ticketHistory = new TicketHistory()
+                    {
+                        TicketId = oldTicket.Id,
+                        UserId = User.Identity.GetUserId(),
+                        Property = "Assigned To User",
+                        OldValue = oldValue,
+                        NewValue = newValue,
+                        Changed = DateTime.Now
+                    };
+                    db.TicketHistories.Add(ticketHistory);
+                    //If Block for Emails
+                    await UserManager.SendEmailAsync(oldId.ToString(), "Ticket", "You have been removed from" + ticket.Title + ".");
+                    await UserManager.SendEmailAsync(newId.ToString(), "New Assignment", "You have been assigned to the ticket," + ticket.Title + ". Please login to view details.");
+
+                }
+                ticket.TicketStatusId = 2;
+                db.Entry(ticket).State = EntityState.Modified;
+                db.SaveChanges();
+
+                return RedirectToAction("Details", new { id = ticket.Id });
+            }
+
+            ViewBag.AssignedToUserId = new SelectList(db.Users, "Id", "FirstName", ticket.AssignedToUserId);
+            return View(ticket);
+        }
 
         // GET: Tickets/Delete/5
         [Authorize(Roles = "Admin")]
@@ -238,7 +316,8 @@ namespace XCalibre.Controllers
         public ActionResult DeleteConfirmed(int id)
         {
             Ticket ticket = db.Tickets.Find(id);
-            db.Tickets.Remove(ticket);
+            //db.Tickets.Remove(ticket);
+            ticket.Closed = true;
             db.SaveChanges();
             return RedirectToAction("Index");
         }

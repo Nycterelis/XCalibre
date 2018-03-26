@@ -18,6 +18,7 @@ namespace XCalibre.Models
         public int? TicketStatusId { get; set; }
         public string OwnerUserId { get; set; }
         public string AssignedToUserId { get; set; }
+        public bool Closed { get; set; }
 
         public virtual TicketType TicketType { get; set; }
         public virtual TicketPriority TicketPriority { get; set; }

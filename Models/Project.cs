@@ -10,6 +10,7 @@ namespace XCalibre.Models
         public int Id { get; set; }
         public string Name { get; set; }
         public string PmId { get; set; }
+        public bool Closed { get; set; }
 
 
         public virtual ICollection<Ticket> Tickets { get; set; }

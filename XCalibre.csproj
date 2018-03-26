@@ -46,6 +46,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="MathParser.org-mXparser.Net461, Version=4.1.1.0, Culture=neutral, PublicKeyToken=0fbab7add73ed6e2, processorArchitecture=MSIL">
+      <HintPath>..\packages\MathParser.org-mXparser.4.1.1\lib\net461\MathParser.org-mXparser.Net461.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform, Version=1.0.7.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.7\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
     </Reference>
@@ -224,6 +227,7 @@
     <Compile Include="Models\Helpers\Extensions.cs" />
     <Compile Include="Models\Helpers\ImageUploadValidator.cs" />
     <Compile Include="Models\Helpers\ProjectHelper.cs" />
+    <Compile Include="Models\Helpers\TicketEval.cs" />
     <Compile Include="Models\Helpers\UserRoleHelper.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
@@ -270,6 +274,7 @@
     <Content Include="assets\images\email\1.png" />
     <Content Include="assets\images\email\2.png" />
     <Content Include="assets\images\email\3.png" />
+    <Content Include="assets\images\landing.jpg" />
     <Content Include="assets\images\favicon.ico" />
     <Content Include="assets\images\file_icons\3ds.svg" />
     <Content Include="assets\images\file_icons\aac.svg" />
@@ -341,6 +346,7 @@
     <Content Include="assets\js\popper.min.js" />
     <Content Include="assets\js\waves.js" />
     <Content Include="assets\js\wow.min.js" />
+    <Content Include="assets\LandingCss\style.css" />
     <Content Include="assets\pages\jquery.autocomplete.init.js" />
     <Content Include="assets\pages\jquery.calendar.js" />
     <Content Include="assets\pages\jquery.chartist.init.js" />
@@ -912,6 +918,145 @@
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\PagedList.css" />
+    <Content Include="docs\allclasses-frame.html" />
+    <Content Include="docs\allclasses-noframe.html" />
+    <Content Include="docs\constant-values.html" />
+    <Content Include="docs\deprecated-list.html" />
+    <Content Include="docs\help-doc.html" />
+    <Content Include="docs\index-files\index-1.html" />
+    <Content Include="docs\index-files\index-10.html" />
+    <Content Include="docs\index-files\index-11.html" />
+    <Content Include="docs\index-files\index-12.html" />
+    <Content Include="docs\index-files\index-13.html" />
+    <Content Include="docs\index-files\index-14.html" />
+    <Content Include="docs\index-files\index-15.html" />
+    <Content Include="docs\index-files\index-16.html" />
+    <Content Include="docs\index-files\index-17.html" />
+    <Content Include="docs\index-files\index-18.html" />
+    <Content Include="docs\index-files\index-19.html" />
+    <Content Include="docs\index-files\index-2.html" />
+    <Content Include="docs\index-files\index-20.html" />
+    <Content Include="docs\index-files\index-21.html" />
+    <Content Include="docs\index-files\index-22.html" />
+    <Content Include="docs\index-files\index-23.html" />
+    <Content Include="docs\index-files\index-24.html" />
+    <Content Include="docs\index-files\index-25.html" />
+    <Content Include="docs\index-files\index-26.html" />
+    <Content Include="docs\index-files\index-3.html" />
+    <Content Include="docs\index-files\index-4.html" />
+    <Content Include="docs\index-files\index-5.html" />
+    <Content Include="docs\index-files\index-6.html" />
+    <Content Include="docs\index-files\index-7.html" />
+    <Content Include="docs\index-files\index-8.html" />
+    <Content Include="docs\index-files\index-9.html" />
+    <Content Include="docs\index.html" />
+    <Content Include="docs\org\mariuszgromada\math\mxparser\Argument.html" />
+    <Content Include="docs\org\mariuszgromada\math\mxparser\class-use\Argument.html" />
+    <Content Include="docs\org\mariuszgromada\math\mxparser\class-use\Constant.html" />
+    <Content Include="docs\org\mariuszgromada\math\mxparser\class-use\Expression.html" />
+    <Content Include="docs\org\mariuszgromada\math\mxparser\class-use\Function.html" />
+    <Content Include="docs\org\mariuszgromada\math\mxparser\class-use\FunctionExtension.html" />
+    <Content Include="docs\org\mariuszgromada\math\mxparser\class-use\mXparser.html" />
+    <Content Include="docs\org\mariuszgromada\math\mxparser\class-use\PrimitiveElement.html" />
+    <Content Include="docs\org\mariuszgromada\math\mxparser\class-use\RecursiveArgument.html" />
+    <Content Include="docs\org\mariuszgromada\math\mxparser\class-use\Tutorial.html" />
+    <Content Include="docs\org\mariuszgromada\math\mxparser\Constant.html" />
+    <Content Include="docs\org\mariuszgromada\math\mxparser\Expression.html" />
+    <Content Include="docs\org\mariuszgromada\math\mxparser\Function.html" />
+    <Content Include="docs\org\mariuszgromada\math\mxparser\FunctionExtension.html" />
+    <Content Include="docs\org\mariuszgromada\math\mxparser\mathcollection\AstronomicalConstants.html" />
+    <Content Include="docs\org\mariuszgromada\math\mxparser\mathcollection\BinaryRelations.html" />
+    <Content Include="docs\org\mariuszgromada\math\mxparser\mathcollection\BooleanAlgebra.html" />
+    <Content Include="docs\org\mariuszgromada\math\mxparser\mathcollection\Calculus.html" />
+    <Content Include="docs\org\mariuszgromada\math\mxparser\mathcollection\class-use\AstronomicalConstants.html" />
+    <Content Include="docs\org\mariuszgromada\math\mxparser\mathcollection\class-use\BinaryRelations.html" />
+    <Content Include="docs\org\mariuszgromada\math\mxparser\mathcollection\class-use\BooleanAlgebra.html" />
+    <Content Include="docs\org\mariuszgromada\math\mxparser\mathcollection\class-use\Calculus.html" />
+    <Content Include="docs\org\mariuszgromada\math\mxparser\mathcollection\class-use\Evaluate.html" />
+    <Content Include="docs\org\mariuszgromada\math\mxparser\mathcollection\class-use\MathConstants.html" />
+    <Content Include="docs\org\mariuszgromada\math\mxparser\mathcollection\class-use\MathFunctions.html" />
+    <Content Include="docs\org\mariuszgromada\math\mxparser\mathcollection\class-use\NumberTheory.html" />
+    <Content Include="docs\org\mariuszgromada\math\mxparser\mathcollection\class-use\PhysicalConstants.html" />
+    <Content Include="docs\org\mariuszgromada\math\mxparser\mathcollection\class-use\PrimesCache.html" />
+    <Content Include="docs\org\mariuszgromada\math\mxparser\mathcollection\class-use\ProbabilityDistributions.html" />
+    <Content Include="docs\org\mariuszgromada\math\mxparser\mathcollection\class-use\SpecialFunctions.html" />
+    <Content Include="docs\org\mariuszgromada\math\mxparser\mathcollection\class-use\Statistics.html" />
+    <Content Include="docs\org\mariuszgromada\math\mxparser\mathcollection\class-use\Units.html" />
+    <Content Include="docs\org\mariuszgromada\math\mxparser\mathcollection\Evaluate.html" />
+    <Content Include="docs\org\mariuszgromada\math\mxparser\mathcollection\MathConstants.html" />
+    <Content Include="docs\org\mariuszgromada\math\mxparser\mathcollection\MathFunctions.html" />
+    <Content Include="docs\org\mariuszgromada\math\mxparser\mathcollection\NumberTheory.html" />
+    <Content Include="docs\org\mariuszgromada\math\mxparser\mathcollection\package-frame.html" />
+    <Content Include="docs\org\mariuszgromada\math\mxparser\mathcollection\package-summary.html" />
+    <Content Include="docs\org\mariuszgromada\math\mxparser\mathcollection\package-tree.html" />
+    <Content Include="docs\org\mariuszgromada\math\mxparser\mathcollection\package-use.html" />
+    <Content Include="docs\org\mariuszgromada\math\mxparser\mathcollection\PhysicalConstants.html" />
+    <Content Include="docs\org\mariuszgromada\math\mxparser\mathcollection\PrimesCache.html" />
+    <Content Include="docs\org\mariuszgromada\math\mxparser\mathcollection\ProbabilityDistributions.html" />
+    <Content Include="docs\org\mariuszgromada\math\mxparser\mathcollection\SpecialFunctions.html" />
+    <Content Include="docs\org\mariuszgromada\math\mxparser\mathcollection\Statistics.html" />
+    <Content Include="docs\org\mariuszgromada\math\mxparser\mathcollection\Units.html" />
+    <Content Include="docs\org\mariuszgromada\math\mxparser\mXparser.html" />
+    <Content Include="docs\org\mariuszgromada\math\mxparser\package-frame.html" />
+    <Content Include="docs\org\mariuszgromada\math\mxparser\package-summary.html" />
+    <Content Include="docs\org\mariuszgromada\math\mxparser\package-tree.html" />
+    <Content Include="docs\org\mariuszgromada\math\mxparser\package-use.html" />
+    <Content Include="docs\org\mariuszgromada\math\mxparser\parsertokens\BinaryRelation.html" />
+    <Content Include="docs\org\mariuszgromada\math\mxparser\parsertokens\BitwiseOperator.html" />
+    <Content Include="docs\org\mariuszgromada\math\mxparser\parsertokens\BooleanOperator.html" />
+    <Content Include="docs\org\mariuszgromada\math\mxparser\parsertokens\CalculusOperator.html" />
+    <Content Include="docs\org\mariuszgromada\math\mxparser\parsertokens\class-use\BinaryRelation.html" />
+    <Content Include="docs\org\mariuszgromada\math\mxparser\parsertokens\class-use\BitwiseOperator.html" />
+    <Content Include="docs\org\mariuszgromada\math\mxparser\parsertokens\class-use\BooleanOperator.html" />
+    <Content Include="docs\org\mariuszgromada\math\mxparser\parsertokens\class-use\CalculusOperator.html" />
+    <Content Include="docs\org\mariuszgromada\math\mxparser\parsertokens\class-use\ConstantValue.html" />
+    <Content Include="docs\org\mariuszgromada\math\mxparser\parsertokens\class-use\Function1Arg.html" />
+    <Content Include="docs\org\mariuszgromada\math\mxparser\parsertokens\class-use\Function2Arg.html" />
+    <Content Include="docs\org\mariuszgromada\math\mxparser\parsertokens\class-use\Function3Arg.html" />
+    <Content Include="docs\org\mariuszgromada\math\mxparser\parsertokens\class-use\FunctionVariadic.html" />
+    <Content Include="docs\org\mariuszgromada\math\mxparser\parsertokens\class-use\KeyWord.html" />
+    <Content Include="docs\org\mariuszgromada\math\mxparser\parsertokens\class-use\Operator.html" />
+    <Content Include="docs\org\mariuszgromada\math\mxparser\parsertokens\class-use\ParserSymbol.html" />
+    <Content Include="docs\org\mariuszgromada\math\mxparser\parsertokens\class-use\RandomVariable.html" />
+    <Content Include="docs\org\mariuszgromada\math\mxparser\parsertokens\class-use\Token.html" />
+    <Content Include="docs\org\mariuszgromada\math\mxparser\parsertokens\class-use\Unit.html" />
+    <Content Include="docs\org\mariuszgromada\math\mxparser\parsertokens\ConstantValue.html" />
+    <Content Include="docs\org\mariuszgromada\math\mxparser\parsertokens\Function1Arg.html" />
+    <Content Include="docs\org\mariuszgromada\math\mxparser\parsertokens\Function2Arg.html" />
+    <Content Include="docs\org\mariuszgromada\math\mxparser\parsertokens\Function3Arg.html" />
+    <Content Include="docs\org\mariuszgromada\math\mxparser\parsertokens\FunctionVariadic.html" />
+    <Content Include="docs\org\mariuszgromada\math\mxparser\parsertokens\KeyWord.html" />
+    <Content Include="docs\org\mariuszgromada\math\mxparser\parsertokens\Operator.html" />
+    <Content Include="docs\org\mariuszgromada\math\mxparser\parsertokens\package-frame.html" />
+    <Content Include="docs\org\mariuszgromada\math\mxparser\parsertokens\package-summary.html" />
+    <Content Include="docs\org\mariuszgromada\math\mxparser\parsertokens\package-tree.html" />
+    <Content Include="docs\org\mariuszgromada\math\mxparser\parsertokens\package-use.html" />
+    <Content Include="docs\org\mariuszgromada\math\mxparser\parsertokens\ParserSymbol.html" />
+    <Content Include="docs\org\mariuszgromada\math\mxparser\parsertokens\RandomVariable.html" />
+    <Content Include="docs\org\mariuszgromada\math\mxparser\parsertokens\Token.html" />
+    <Content Include="docs\org\mariuszgromada\math\mxparser\parsertokens\Unit.html" />
+    <Content Include="docs\org\mariuszgromada\math\mxparser\PrimitiveElement.html" />
+    <Content Include="docs\org\mariuszgromada\math\mxparser\RecursiveArgument.html" />
+    <Content Include="docs\org\mariuszgromada\math\mxparser\regressiontesting\class-use\PerformanceTests.html" />
+    <Content Include="docs\org\mariuszgromada\math\mxparser\regressiontesting\class-use\RegTestExpression.html" />
+    <Content Include="docs\org\mariuszgromada\math\mxparser\regressiontesting\class-use\RegTestExpressionAPI.html" />
+    <Content Include="docs\org\mariuszgromada\math\mxparser\regressiontesting\class-use\RegTestSyntax.html" />
+    <Content Include="docs\org\mariuszgromada\math\mxparser\regressiontesting\class-use\RunTest.html" />
+    <Content Include="docs\org\mariuszgromada\math\mxparser\regressiontesting\package-frame.html" />
+    <Content Include="docs\org\mariuszgromada\math\mxparser\regressiontesting\package-summary.html" />
+    <Content Include="docs\org\mariuszgromada\math\mxparser\regressiontesting\package-tree.html" />
+    <Content Include="docs\org\mariuszgromada\math\mxparser\regressiontesting\package-use.html" />
+    <Content Include="docs\org\mariuszgromada\math\mxparser\regressiontesting\PerformanceTests.html" />
+    <Content Include="docs\org\mariuszgromada\math\mxparser\regressiontesting\RegTestExpression.html" />
+    <Content Include="docs\org\mariuszgromada\math\mxparser\regressiontesting\RegTestExpressionAPI.html" />
+    <Content Include="docs\org\mariuszgromada\math\mxparser\regressiontesting\RegTestSyntax.html" />
+    <Content Include="docs\org\mariuszgromada\math\mxparser\regressiontesting\RunTest.html" />
+    <Content Include="docs\org\mariuszgromada\math\mxparser\Tutorial.html" />
+    <Content Include="docs\overview-frame.html" />
+    <Content Include="docs\overview-summary.html" />
+    <Content Include="docs\overview-tree.html" />
+    <Content Include="docs\script.js" />
+    <Content Include="docs\stylesheet.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -1112,7 +1257,6 @@
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
     <Content Include="Uploads\wallhaven-573091.jpg" />
-    <Content Include="Views\Assets Views\extras-profile.html" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
@@ -1212,10 +1356,17 @@
     <Content Include="Views\Shared\_CommPart.cshtml" />
     <Content Include="Views\Manage\ProfilePicture.cshtml" />
     <Content Include="Views\UserPersonal\Index.cshtml" />
+    <Content Include="Views\Tickets\EditUser.cshtml" />
+    <Content Include="Views\Tickets\AllTickets.cshtml" />
+    <Content Include="Views\Tickets\ClosedTickets.cshtml" />
+    <Content Include="Views\Projects\AllProjects.cshtml" />
+    <Content Include="Views\Projects\ClosedProjects.cshtml" />
+    <Content Include="Views\Home\Dashboard.cshtml" />
+    <Content Include="Views\Home\Test.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\NewFolder1\" />
+    <Folder Include="Views\Assets Views\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />

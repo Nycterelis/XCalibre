@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.AspNet.Identity.Owin;
+using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Linq;
@@ -25,42 +26,19 @@ namespace XCalibre.Controllers
             return View();
         }
 
-        public ActionResult Contact()
+        public ActionResult Dashboard()
         {
-            ViewBag.Message = "Your contact page.";
-
-            Email model = new Email();
-            return View(model);
+            return View();
         }
-        
-        //[HttpPost]
-        //[ValidateAntiForgeryToken]
-        ////public async Task<ActionResult> Contact(Email model)
-        ////{
-        ////    if (ModelState.IsValid)
-        ////    {
-        ////        try
-        ////        {
-        ////            var body = "<p>Email From: <bold>{0}</bold>({1})</p><p>Message:</p><p>{2}</p>";
-        ////            var from = "XCalibre<XCalibreSystem@gmail.com>";
-        ////            model.Body = "This is a placeholder body that needs to be replaced later.";
-        ////            var email = new MailMessage(from, ConfigurationManager.AppSettings["emailto"])
-        ////            {
-        ////                Subject = "XCalibre Email",
-        ////                Body = string.Format(body, model.FromName, model.FromEmail, model.Body),
-        ////                IsBodyHtml = true
-        ////            };
-        ////            var svc = new PersonalEmail();
-        ////            await svc.SendAsync(email);
-        ////            return View(new Email());
-        ////        }
-        ////        catch (Exception ex)
-        ////        {
-        ////            Console.WriteLine(ex.Message);
-        ////            await Task.FromResult(0);
-        ////        }
-        ////        return View(model);
-        ////    }
-        ////}
+        //public ActionResult Contact()
+        //{
+        //    ViewBag.Message = "Your contact page.";
+
+        //    Email model = new Email();
+        //    return View(model);
+        //}
+
+
+
     }
 }

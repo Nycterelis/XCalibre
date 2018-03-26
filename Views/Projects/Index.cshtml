@@ -105,37 +105,27 @@
 
                 <label class="">Tickets Resolved: <span class="text-custom">@item.Project.Tickets.Where(s => s.TicketStatusId == 6).Count()/@item.Project.Tickets.Count</span></label>
                 <div class="progress mb-1" style="height: 7px;">
-                    <div class="progress-bar"
-                         role="progressbar" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100"
-                         style="width: 80%;">
-                    </div><!-- /.progress-bar .progress-bar-danger -->
+                    @{
+                        var resolved = Convert.ToInt32(item.Project.Tickets.Where(s => s.TicketStatusId == 6).Count());
+                        var total = Convert.ToInt32(item.Project.Tickets.Count());
+                        var percent = 0;
+                        if (total != 0)
+                        {
+                            decimal ratio = Convert.ToDecimal(resolved) / Convert.ToDecimal(total);
+                            percent = Convert.ToInt32(ratio * 100);
+
+                        }
+
+
+
+                        <div class="progress-bar"
+                             role="progressbar" aria-valuenow=@resolved aria-valuemin="0" aria-valuemax=@total
+                             style="width: @percent%;">
+                        </div><!-- /.progress-bar .progress-bar-danger -->
+                    }
                 </div><!-- /.progress .no-rounded -->
 
             </div>
         </div><!-- end col-->
     }
 </div><!--Ends the Row?-->
-@*<table class="table">
-        <tr>
-            <th>
-
-            </th>
-            <th></th>
-        </tr>
-
-
-        @Html.ActionLink("Test", "MyProjects", "UserPersonal", new { userId = User.Identity.GetUserId() }, null)
-                    <tr>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Name)
-                        </td>
-                        <td>
-                            @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
-                            @Html.ActionLink("Details", "Details", new { id = item.Id }) |
-                            @Html.ActionLink("Delete", "Delete", new { id = item.Id }) |
-                            @Html.ActionLink("Edit Users", "EditProjectUser", "AdminProjectView", new { id = item.Id }, null) |
-                            @Html.ActionLink("Assign to a Project Manager", "EditProjectManager", "AdminProjectView", new { id = item.Id }, null)
-                        </td>
-                    </tr>
-
-    </table>*@

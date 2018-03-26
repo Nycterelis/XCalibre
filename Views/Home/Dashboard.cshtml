@@ -1,0 +1,29 @@
+﻿@using Microsoft.AspNet.Identity;
+@{
+    ViewBag.Title = "Dashboard";
+}
+
+<!--What the Developer Role Can See-->
+@if (User.IsInRole("Developer"))
+{
+    @Html.ActionLink("My Projects", "MyProjects", "UserPersonal", new { userId = User.Identity.GetUserId() }, null) <br />
+    @Html.ActionLink("My Assigned Tickets", "MyAssignedTickets", "UserPersonal", new { userId = User.Identity.GetUserId() }, null) <br />
+
+}
+<!--What the Project Manager Role Can See-->
+@if (User.IsInRole("ProjectManager"))
+{
+    @Html.ActionLink("My Managed Projects", "MyManagedProjects", "UserPersonal", new { userId = User.Identity.GetUserId() }, null) <br />
+}
+<!--What the Submitter Role Can See-->
+@if (User.IsInRole("Submitter"))
+{
+    @Html.ActionLink("My Submitted Tickets", "MySubmittedTickets", "UserPersonal", new { userId = User.Identity.GetUserId() }, null) <br />
+}
+@if (User.IsInRole("Admin"))
+{
+    @Html.ActionLink("Edit User Roles", "Index", "AdminUserView", null, null) <br />
+}
+@Html.ActionLink("All Projects", "Index", "Projects", new { userId = User.Identity.GetUserId() }, null) |
+@Html.ActionLink("All Tickets", "Index", "Tickets", new { userId = User.Identity.GetUserId() }, null)
+

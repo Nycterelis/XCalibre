@@ -1,5 +1,6 @@
 ﻿@using Microsoft.AspNet.Identity
 @using XCalibre.Models.Helpers;
+@using XCalibre.Models;
 @if (Request.IsAuthenticated)
 {
     using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
@@ -16,7 +17,10 @@
                     <li class="dropdown notification-list">
                         <a class="nav-link dropdown-toggle nav-user" data-toggle="dropdown" href="#" role="button"
                            aria-haspopup="false" aria-expanded="false">
+
                             <img src=@User.Identity.GetPic() alt="user" class="rounded-circle"> <span class="ml-1">@User.Identity.GetFullName()<i class="mdi mdi-chevron-down"></i> </span>
+
+
                         </a>
                         <div class="dropdown-menu dropdown-menu-right dropdown-menu-animated profile-dropdown ">
                             <!-- item-->
@@ -67,12 +71,12 @@
 
 
 
-        <ul class="nav navbar-nav navbar-right">
-            <li>
-                @Html.ActionLink("Hello " + User.Identity.GetFullName() + "!", "Index", "Manage", routeValues: null, htmlAttributes: new { title = "Manage" })
-            </li>
-            <li><a href="javascript:document.getElementById('logoutForm').submit()">Log off</a></li>
-        </ul>
+        @*<ul class="nav navbar-nav navbar-right">
+                <li>
+                    @Html.ActionLink("Hello " + User.Identity.GetFullName() + "!", "Index", "Manage", routeValues: null, htmlAttributes: new { title = "Manage" })
+                </li>
+                <li><a href="javascript:document.getElementById('logoutForm').submit()">Log off</a></li>
+            </ul>*@
     }
 }
 else
@@ -80,5 +84,6 @@ else
     <ul class="nav navbar-nav navbar-right">
         <li>@Html.ActionLink("Register", "Register", "Account", routeValues: null, htmlAttributes: new { id = "registerLink" })</li>
         <li>@Html.ActionLink("Log in", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink" })</li>
+        <li><button type="button" class="btn btn-primary waves-effect waves-light" data-toggle="modal" data-target="#signup-modal">Sign Up Modal</button></li>
     </ul>
 }
