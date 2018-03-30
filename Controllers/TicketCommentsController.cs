@@ -1,10 +1,12 @@
 ﻿using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.Owin;
 using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
 using System.Linq;
 using System.Net;
+using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 using XCalibre.Models;
@@ -15,6 +17,18 @@ namespace XCalibre.Controllers
     public class TicketCommentsController : Controller
     {
         private ApplicationDbContext db = new ApplicationDbContext();
+        private ApplicationUserManager _userManager;
+        public ApplicationUserManager UserManager
+        {
+            get
+            {
+                return _userManager ?? HttpContext.GetOwinContext().GetUserManager<ApplicationUserManager>();
+            }
+            private set
+            {
+                _userManager = value;
+            }
+        }
 
         // GET: TicketComments
         public ActionResult Index()
@@ -39,9 +53,9 @@ namespace XCalibre.Controllers
         }
 
         // GET: TicketComments/Create
-        public ActionResult Create()
+        public ActionResult Create(int ticketId)
         {
-            ViewBag.TicketId = new SelectList(db.Tickets, "Id", "Title");
+            ViewBag.TicketId = ticketId;
             ViewBag.UserId = new SelectList(db.Users, "Id", "FirstName");
             return View();
         }
@@ -51,16 +65,17 @@ namespace XCalibre.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Body,TicketId")] TicketComment ticketComment)
+        public async Task<ActionResult> Create([Bind(Include = "Id,Body,TicketId")] TicketComment ticketComment)
         {
             if (ModelState.IsValid)
             {
                 ticketComment.Created = DateTimeOffset.Now;
                 ticketComment.UserId = User.Identity.GetUserId();
-                
                 db.TicketComments.Add(ticketComment);
                 db.SaveChanges();
                 var tkt = db.Tickets.Find(ticketComment.TicketId);
+                var developer = tkt.AssignedToUserId;
+                await UserManager.SendEmailAsync(developer, "New Ticket Comment", "A new comment as appeared on your assigned ticket, " + tkt.Title + ".");
                 return RedirectToAction("Details", "Tickets", new { id = tkt.Id });
             }
 

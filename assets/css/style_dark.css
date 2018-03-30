@@ -341,10 +341,11 @@ File: Main Css File
   min-height: 56px;
 }
 
-.enlarged #wrapper .left.side-menu #sidebar-menu > ul > li > a:hover, .enlarged #wrapper .left.side-menu #sidebar-menu > ul > li > a:active, .enlarged #wrapper .left.side-menu #sidebar-menu > ul > li > a:focus {
-  color: #313a46;
-  background-color: #e3eaef;
-}
+    .enlarged #wrapper .left.side-menu #sidebar-menu > ul > li > a:hover, .enlarged #wrapper .left.side-menu #sidebar-menu > ul > li > a:active, .enlarged #wrapper .left.side-menu #sidebar-menu > ul > li > a:focus {
+        color: #313a46;
+        background-color: #e3eaef;
+        
+    }
 
 .enlarged #wrapper .left.side-menu #sidebar-menu > ul > li > a i {
   font-size: 18px;
@@ -686,14 +687,14 @@ body.enlarged.bg-transparent {
   .content-page .content {
     padding-top: 70px;
   }
-  .navbar-custom {
-    background-color: #ffffff;
-    position: fixed;
-    left: 0;
-    right: 0;
-    box-shadow: 0 0 24px 0 rgba(0, 0, 0, 0.06), 0 1px 0 0 rgba(0, 0, 0, 0.02);
-    z-index: 999;
-  }
+    .navbar-custom {
+        background-color: #ffffff;
+        position: fixed;
+        left: 0;
+        right: 0;
+        box-shadow: 0 0 24px 0 rgba(0, 0, 0, 0.06), 0 1px 0 0 rgba(0, 0, 0, 0.02);
+        z-index: 999;
+    }
   .page-title-box .page-title {
     font-size: 16px;
     margin-bottom: 6px;
@@ -818,12 +819,12 @@ body.enlarged.bg-transparent {
    Common
 ============= */
 body {
-  margin: 0;
-  padding-bottom: 60px;
-  overflow-x: hidden;
-  font-size: 14px;
-  background-color: #f3f6f8;
-  font-family: "Roboto", sans-serif;
+    margin: 0;
+    padding-bottom: 60px;
+    overflow-x: hidden;
+    font-size: 14px;
+    background-color: #e3e6e8; /*#e3e6e8*/
+    font-family: "Roboto", sans-serif;
 }
 
 html {
@@ -2786,7 +2787,7 @@ code {
 }
 
 .alert-light {
-  background-color: #f3f6f8;
+  background-color: #e3e6e8;
   border-color: #e3eaef;
 }
 
@@ -3028,7 +3029,7 @@ code {
 
 /* Inbox-widget */
 .inbox-widget .inbox-item {
-  border-bottom: 1px solid #f3f6f8;
+  border-bottom: 1px solid #e3e6e8;
   overflow: hidden;
   padding: 10px 0;
   position: relative;
@@ -3103,7 +3104,7 @@ code {
 /* Transaction */
 .transaction-list li {
   padding: 7px 0;
-  border-bottom: 1px solid #f3f6f8;
+  border-bottom: 1px solid #e3e6e8;
   clear: both;
   position: relative;
 }
@@ -3136,7 +3137,7 @@ code {
 }
 
 .navtab-bg {
-  background-color: #f3f6f8;
+  background-color: #e3e6e8;
 }
 
 .nav-tabs > li > a, .nav-pills > li > a {
@@ -3898,7 +3899,7 @@ input[type="color"] {
 
 .select2-container--default .select2-search--dropdown {
   padding: 10px;
-  background-color: #f3f6f8;
+  background-color: #e3e6e8;
 }
 
 .select2-container--default .select2-search--dropdown .select2-search__field {
@@ -4267,7 +4268,7 @@ input[type="color"] {
 }
 
 .wizard > .steps {
-  background-color: #f3f6f8;
+  background-color: #e3e6e8;
 }
 
 .wizard > .steps .number {
@@ -4469,7 +4470,7 @@ th {
 }
 
 .table-striped tbody tr:nth-of-type(odd), .table-hover tbody tr:hover, .table-active, .table-active > td, .table-active > th {
-  background-color: #f3f6f8;
+  background-color: #e3e6e8;
 }
 
 .table-success, .table-success > td, .table-success > th {
@@ -4668,7 +4669,7 @@ table.dataTable > tbody > tr.child span.dtr-title {
 
 /* Tablesaw Tables */
 .tablesaw thead {
-  background: #f3f6f8;
+  background: #e3e6e8;
   background-image: none;
   border: none;
 }
@@ -4684,7 +4685,7 @@ table.dataTable > tbody > tr.child span.dtr-title {
 }
 
 .tablesaw td {
-  border-top: 1px solid #f3f6f8 !important;
+  border-top: 1px solid #e3e6e8 !important;
 }
 
 .tablesaw td, .tablesaw tbody th {
@@ -6055,5 +6056,9 @@ h3.timeline-title {
     margin-top: -70px;
     max-width: 850px;
     padding: 20px;
+}
+.ticketbody {
+    width: 300px;
+    height: 150px;
 }
 /*# sourceMappingURL=style_dark.css.map */

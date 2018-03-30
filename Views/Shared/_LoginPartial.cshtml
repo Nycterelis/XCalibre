@@ -51,7 +51,7 @@
                             <i class="dripicons-menu"></i>
                         </button>
                     </li>
-                    <li>
+                    @*<li>
                         <div class="page-title-box">
                             <h4 class="page-title">Dark Menu </h4>
                             <ol class="breadcrumb">
@@ -60,7 +60,7 @@
                                 <li class="breadcrumb-item active">Dark Menu</li>
                             </ol>
                         </div>
-                    </li>
+                    </li>*@
 
                 </ul>
 
@@ -84,6 +84,6 @@ else
     <ul class="nav navbar-nav navbar-right">
         <li>@Html.ActionLink("Register", "Register", "Account", routeValues: null, htmlAttributes: new { id = "registerLink" })</li>
         <li>@Html.ActionLink("Log in", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink" })</li>
-        <li><button type="button" class="btn btn-primary waves-effect waves-light" data-toggle="modal" data-target="#signup-modal">Sign Up Modal</button></li>
+        @*<li><button type="button" class="btn btn-primary waves-effect waves-light" data-toggle="modal" data-target="#signup-modal">Sign Up Modal</button></li>*@
     </ul>
 }

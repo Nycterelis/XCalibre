@@ -13,84 +13,83 @@
 
 
 
-
-<h2>Manage User Roles and Projects</h2>
-@Html.AntiForgeryToken()
-
-<table class="table">
-    <tr>
-        <th>
-           <p> @Html.DisplayNameFor(model => model.User.FirstName) @Html.DisplayNameFor(model => model.User.LastName)</p>
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.User.Roles)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.User.Projects)
-        </th>
-    </tr>
-
+<div class="row">
     @foreach (var u in Model)
     {
-        <tr>
-            <td>
-               <p> @Html.DisplayFor(model => u.User.FirstName) @Html.DisplayFor(model => u.User.LastName)</p>
-            </td>
-            
-            <td>
-                <p>
-                    @{ string roleString = string.Join(", ", u.SelectedRoles);
-                        @roleString;
-                        }
-                </p>
-            </td>
-            <td>@*Need to Add List of projects in this column*@
-                <p>
-                    
-                </p>
-            </td>
-            <td>
-                @Html.ActionLink("Edit", "EditUser", new { id = u.User.Id })
-                    
-            </td>
 
-        </tr>
+        var fullname = u.User != null ? u.User.FullName : "";
+        var picture = u.User != null ? u.User.ProfilePicture : "../assets/images/users/avatar-1.jpg";
+
+        <div class="col-md-4">
+            <div class="text-center card-box">
+
+                <div class="member-card pt-2 pb-2">
+                    <div class="thumb-lg member-thumb m-b-10 mx-auto">
+                        <img src=@picture class="rounded-circle img-thumbnail" alt="profile-image">
+                    </div>
+
+                    <div class="">
+                        <h4 class="m-b-5">@fullname</h4>
+                        <p class="text-muted">
+                            @{ string roleString = string.Join(", ", u.SelectedRoles);
+                                @roleString;
+                            }
+                            @*<span> | </span>*@
+                        </p>
+                    </div>
+
+                    @if (User.IsInRole("Admin"))
+                    {
+                        @Html.ActionLink("Edit Roles", "EditUser", new { id = u.User.Id }, new { @class = "btn btn-custom m-t-20 btn-rounded btn-bordered waves-effect w-md waves-light" })
+
+                    }
+
+                </div>
+            </div> <!-- end col -->
+        </div>
     }
-
-</table>
-               
-
-
-@* Pick up and revisit the below code to better display roles *@
-@*@{ var roleHelp = new UserRoleHelper();
-    var userRoles = roleHelp.ListUserRoles()
-     }*@
-
-@*@foreach (var item in Model)
-    {
-        @Html.DisplayNameFor(model => model.User)
-        @Html.ActionLink("Edit", "EditUser", "AdminUserViewController", new { id = item.User.Id }, null)
-    }*@
+</div>
 
 
 
-
-
-
-
-@*<div class="form-group">
-        @Html.LabelFor(model => model.Name, htmlAttributes: new { @class = "control-label col-md-2" })
-        <div class="col-md-10">
-            @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control" } })
-            @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+@*=======================================================================================================
+        Below is a place to show number of Projects, Tickets, and Comments. Not sure how to get those values.
+    ========================================================================================================*@
+@*<div class="mt-4">
+            <div class="row">
+                <div class="col-4">
+                    <div class="mt-3">
+                        <h4 class="m-b-5">@u.User.Projects.Count()</h4>
+                        <p class="mb-0 text-muted">Projects</p>
+                    </div>
+                </div>
+                <div class="col-4">
+                    <div class="mt-3">
+                        <h4 class="m-b-5">@u.User.</h4>
+                        <p class="mb-0 text-muted">Tickets</p>
+                    </div>
+                </div>
+                <div class="col-4">
+                    <div class="mt-3">
+                        <h4 class="m-b-5">1125</h4>
+                        <p class="mb-0 text-muted">Comments</p>
+                    </div>
+                </div>
+            </div>
         </div>
-    </div>
 
-    <div class="form-group">
-        <div class="col-md-offset-2 col-md-10">
-            <input type="submit" value="Save" class="btn btn-default" />
-        </div>
     </div>*@
+
+
+
+
+
+
+
+
+
+
+
 
 
 

@@ -28,7 +28,7 @@ namespace XCalibre.Controllers
 
         public ActionResult Dashboard()
         {
-            return View();
+            return RedirectToAction("Index", "UserPersonal", null);
         }
         //public ActionResult Contact()
         //{

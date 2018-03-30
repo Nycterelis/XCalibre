@@ -40,6 +40,8 @@ namespace XCalibre.Models.Helpers
             }
         }
 
+      
+
         public static async Task RefreshAuthentication(this HttpContextBase context, ApplicationUser user)
         {
             context.GetOwinContext().Authentication.SignOut();

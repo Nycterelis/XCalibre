@@ -24,7 +24,7 @@
                         <th>Old value</th>
                         <th>New Value</th>
                         <th>Date Changed</th>
-                        
+
                     </tr>
                 </thead>
 
@@ -34,9 +34,20 @@
                         <tr>
                             <td>@Html.DisplayFor(modelItem => item.Ticket.Title)</td>
                             <td>@Html.DisplayFor(modelItem => item.User.FullName)</td>
-                            <td>@Html.DisplayFor(modelItem => item.Property)</td>
-                            <td>@Html.DisplayFor(modelItem => item.OldValue)</td>
+                            <td>
+                                @if (item.Property == "TicketPriorityId")
+                                {@Html.Display("Ticket Priority")}
+                                @if (item.Property == "TicketStatusId")
+                                {@Html.Display("Ticket Priority")}
+                                @if (item.Property == "TicketTypeId")
+                                {@Html.Display("Ticket Type")}
+                                else
+                                {
 
+                                @Html.DisplayFor(modelItem => item.Property)
+                                }
+                            </td>
+                            <td>@Html.DisplayFor(modelItem => item.OldValue)</td>
                             <td> @Html.DisplayFor(modelItem => item.NewValue)</td>
                             <td>@item.Changed.ToString("MMM dd yyyy")</td>
 

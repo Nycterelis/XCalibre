@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Drawing;
 using System.Drawing.Imaging;
+using System.IO;
 using System.Linq;
 using System.Web;
 
@@ -16,20 +17,28 @@ namespace XCalibre.Models.Helpers
 
             if (file.ContentLength > 1024 * 1024 * 1024 || file.ContentLength < 1024)
                 return false;
-
-            try
+            string fileExt = Path.GetExtension(file.FileName).ToLower();
+            if (fileExt == ".pdf" || fileExt == ".doc" || fileExt == ".docx" || fileExt == "xls" || fileExt == ".jpg" || fileExt == ".png" || fileExt == ".gif" || fileExt == ".bmp")
             {
-                using (var img = Image.FromStream(file.InputStream))
-                {
-                    return ImageFormat.Jpeg.Equals(img.RawFormat) ||
-                           ImageFormat.Png.Equals(img.RawFormat) ||
-                           ImageFormat.Gif.Equals(img.RawFormat);
-                }
+                return true;
             }
-            catch
+            else
             {
                 return false;
             }
+            //try
+            //{
+            //    using (var img = Image.FromStream(file.InputStream))
+            //    {
+            //        return ImageFormat.Jpeg.Equals(img.RawFormat) ||
+            //               ImageFormat.Png.Equals(img.RawFormat) ||
+            //               ImageFormat.Gif.Equals(img.RawFormat);
+            //    }
+            //}
+            //catch
+            //{
+            //    return false;
+            //}
         }
     }
 }

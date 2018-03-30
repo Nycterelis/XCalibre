@@ -1,5 +1,6 @@
 ﻿@model XCalibre.Models.Ticket
 @using XCalibre.Models;
+@using Microsoft.AspNet.Identity;
 
 @{
     ViewBag.Title = "Details";
@@ -56,8 +57,11 @@
                 </li>
 
                 <li>
-                    <h5 class="m-b-5">Last Update</h5>
-                    <p>@Html.DisplayFor(model => model.Updated)</p>
+                    @if (Model.Updated != null)
+                    {
+                        <h5 class="m-b-5">Last Update</h5>
+                        <p>@Html.DisplayFor(model => model.Updated)</p>
+                    }
                 </li>
             </ul>
             <div class="clearfix"></div>
@@ -101,7 +105,47 @@
                         <div class="file-box">
                             @if (att.FileUrl != null)
                             {
-                                <img class="img-responsive" width="100%" height="100%" src="@Url.Content(att.FileUrl)" alt="" />
+                                if (att.FileUrl.Contains(".jpg"))
+                                {
+                                    <img class="img-responsive" width="100%" height="100%" src="@Url.Content(att.FileUrl)" alt="" />
+                                    <a href=@Url.Action("Download", "TicketAttachments", new { ImageName = att.FileUrl })><i class="dripicons-download"></i></a>
+                                }
+                                else if (att.FileUrl.Contains(".jpeg"))
+                                {
+                                    <img class="img-responsive" width="100%" height="100%" src="@Url.Content(att.FileUrl)" alt="" />
+                                    <a href=@Url.Action("Download", "TicketAttachments", new { ImageName = att.FileUrl })><i class="dripicons-download"></i></a>
+                                }
+                                else if (att.FileUrl.Contains(".gif"))
+                                {
+                                    <img class="img-responsive" width="100%" height="100%" src="@Url.Content(att.FileUrl)" alt="" />
+                                    <a href=@Url.Action("Download", "TicketAttachments", new { ImageName = att.FileUrl })><i class="dripicons-download"></i></a>
+                                }
+                                else if (att.FileUrl.Contains(".png"))
+                                {
+                                    <img class="img-responsive" width="100%" height="100%" src="@Url.Content(att.FileUrl)" alt="" />
+                                    <a href=@Url.Action("Download", "TicketAttachments", new { ImageName = att.FileUrl })><i class="dripicons-download"></i></a>
+                                }
+                                else if (att.FileUrl.Contains(".bmp"))
+                                {
+                                    <img class="img-responsive" width="100%" height="100%" src="@Url.Content(att.FileUrl)" alt="" />
+                                    <a href=@Url.Action("Download", "TicketAttachments", new { ImageName = att.FileUrl })><i class="dripicons-download"></i></a>
+                                }
+                                else if (att.FileUrl.Contains(".pdf"))
+                                {
+                                    <img class="img-responsive" width="100%" height="100%" src="~/Uploads/PDF File Extension.png" alt="" />
+                                    <a href=@Url.Action("Download", "TicketAttachments", new { ImageName = att.FileUrl })><i class="dripicons-download"></i></a>
+                                }
+                                else if (att.FileUrl.Contains(".xls"))
+                                {
+                                    <img class="img-responsive" width="100%" height="100%" src="~/Uploads/XLS File Extension.png" alt="" />
+                                    <a href=@Url.Action("Download", "TicketAttachments", new { ImageName = att.FileUrl })><i class="dripicons-download"></i></a>
+                                }
+                                else
+                                {
+                                    <img class="img-responsive" width="100%" height="100%" src="~/Uploads/DOC File Extension.png" alt="" />
+                                    <a href=@Url.Action("Download", "TicketAttachments", new { ImageName = att.FileUrl })><i class="dripicons-download"></i></a>
+
+                                }
                             }
                         </div>
                     }
@@ -110,7 +154,22 @@
 
 
                     <div class="file-box ml-3">
-                        <span>@Html.ActionLink("+", "Create", "TicketAttachments", new { TicketId = Model.Id }, new { @class = "add-new-plus" }) </span>
+                        @if (Model.AssignedToUserId == User.Identity.GetUserId())
+                        {
+                            <span>@Html.ActionLink("+", "Create", "TicketAttachments", new { TicketId = Model.Id }, new { @class = "add-new-plus" }) </span>
+                        }
+                        else if (Model.OwnerUserId == User.Identity.GetUserId())
+                        {
+                            <span>@Html.ActionLink("+", "Create", "TicketAttachments", new { TicketId = Model.Id }, new { @class = "add-new-plus" }) </span>
+                        }
+                        else if (Model.Project.PmId == User.Identity.GetUserId())
+                        {
+                            <span>@Html.ActionLink("+", "Create", "TicketAttachments", new { TicketId = Model.Id }, new { @class = "add-new-plus" }) </span>
+                        }
+                        else if (User.IsInRole("Admin"))
+                        {
+                            <span>@Html.ActionLink("+", "Create", "TicketAttachments", new { TicketId = Model.Id }, new { @class = "add-new-plus" }) </span>
+                        }
                     </div>
                 </div>
                 <div class="row">
@@ -152,7 +211,22 @@
                         </ul>
                     </div>
                 </div>
-                @Html.ActionLink("Comment", "Create", "TicketComments", new { TicketId = Model.Id }, new { @class = "btn btn-primary" })
+                @if (Model.AssignedToUserId == User.Identity.GetUserId())
+                {
+                    @Html.ActionLink("Comment", "Create", "TicketComments", new { TicketId = Model.Id }, new { @class = "btn btn-custom btn-rounded waves-light waves-effect" })
+                }
+                else if (Model.OwnerUserId == User.Identity.GetUserId())
+                {
+                    @Html.ActionLink("Comment", "Create", "TicketComments", new { TicketId = Model.Id }, new { @class = "btn btn-custom btn-rounded waves-light waves-effect" })
+                }
+                else if (Model.Project.PmId == User.Identity.GetUserId())
+                {
+                    @Html.ActionLink("Comment", "Create", "TicketComments", new { TicketId = Model.Id }, new { @class = "btn btn-custom btn-rounded waves-light waves-effect" })
+                }
+                else if (User.IsInRole("Admin"))
+                {
+                    @Html.ActionLink("Comment", "Create", "TicketComments", new { TicketId = Model.Id }, new { @class = "btn btn-custom btn-rounded waves-light waves-effect" })
+                }
             </div>
         </div>
     </div>
@@ -161,14 +235,27 @@
 <p>
     @if (User.IsInRole("Admin"))
     {
-        @Html.ActionLink("Edit", "Edit", new { id = Model.Id })
+        @Html.ActionLink("Edit", "Edit", new { id = Model.Id }, new { @class = "btn btn-rounded btn-warning waves-light waves-effect" })
+        @Html.ActionLink("Close", "Delete", new { id = Model.Id }, new { @class = "btn btn-rounded btn-danger waves-light waves-effect" })
+        @Html.ActionLink("History", "Index", "TicketHistories", new { id = Model.Id }, new { @class = "btn btn-rounded btn-primary waves-light waves-effect" })
     }
-    @if (User.IsInRole("ProjectManager"))
+    else if (User.IsInRole("ProjectManager"))
     {
-        @Html.ActionLink("Edit", "Edit", new { id = Model.Id })
+        @Html.ActionLink("Edit", "Edit", new { id = Model.Id }, new { @class = "btn btn-rounded btn-warning waves-light waves-effect" })
+        @Html.ActionLink("Close", "Delete", new { id = Model.Id }, new { @class = "btn btn-rounded btn-danger waves-light waves-effect" })
+        @Html.ActionLink("History", "Index", "TicketHistories", new { id = Model.Id }, new { @class = "btn btn-rounded btn-primary waves-light waves-effect" })
     }
-    @Html.ActionLink("Back to List", "Index") |
+    else if (Model.AssignedToUserId == User.Identity.GetUserId())
+    {
+        @Html.ActionLink("Edit", "Edit", new { id = Model.Id }, new { @class = "btn btn-rounded btn-warning waves-light waves-effect" })
+        @Html.ActionLink("History", "Index", "TicketHistories", new { id = Model.Id }, new { @class = "btn btn-rounded btn-primary waves-light waves-effect" })
+    }
+    else if (Model.OwnerUserId == User.Identity.GetUserId())
+    {
+        @Html.ActionLink("Edit", "Edit", new { id = Model.Id }, new { @class = "btn btn-rounded btn-warning waves-light waves-effect" })
+    }
 
-    @Html.ActionLink("Close", "Delete", new { id = Model.Id })
+
+
 </p>
 

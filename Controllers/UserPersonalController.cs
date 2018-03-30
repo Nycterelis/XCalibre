@@ -1,9 +1,7 @@
 ﻿using Microsoft.AspNet.Identity;
-using System;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 using XCalibre.Models;
 
@@ -19,7 +17,49 @@ namespace XCalibre.Controllers
         public ActionResult Index()
         {
             var userId = User.Identity.GetUserId();
-            return View();
+            var assignedProjects = db.Users.Find(userId).Projects.ToList();
+            var assignedTickets = db.Tickets.Where(u => u.AssignedToUserId == userId).ToList();
+            var submittedTickets = db.Tickets.Where(u => u.OwnerUserId == userId).ToList();
+            var managedProjects = db.Projects.Where(u => u.PmId == userId).ToList();
+            List<UserPersonalViewModel> vm = new List<UserPersonalViewModel>();
+            foreach (var proj in assignedProjects)
+            {
+                UserPersonalViewModel viewmodelProj = new UserPersonalViewModel()
+                {
+                    Project = proj
+
+                };
+                vm.Add(viewmodelProj);
+            }
+            foreach (var tick in assignedTickets)
+            {
+                UserPersonalViewModel viewmodelTick = new UserPersonalViewModel()
+                {
+                    AssignedTicket = tick
+
+                };
+                vm.Add(viewmodelTick);
+            }
+            foreach (var tick in submittedTickets)
+            {
+                UserPersonalViewModel viewmodelStick = new UserPersonalViewModel()
+                {
+                    SubmittedTicket = tick
+
+                };
+                vm.Add(viewmodelStick);
+            }
+            foreach (var proj in managedProjects)
+            {
+                UserPersonalViewModel viewmodelMProj = new UserPersonalViewModel()
+                {
+                    ManagedProject = proj
+
+                };
+                vm.Add(viewmodelMProj);
+            }
+
+            return View(vm);
         }
 
         // GET: My Projects
@@ -30,8 +70,18 @@ namespace XCalibre.Controllers
             var userId = User.Identity.GetUserId();
             //var userProjects = db.Users.Find(userId).Projects.Where(p => p.PmId == userId).ToList();
             var assignedProjects = db.Users.Find(userId).Projects.ToList();
+            List<ProjectViewModel> vm = new List<ProjectViewModel>();
+            foreach (var p in assignedProjects)
+            {
+                ProjectViewModel viewmodel = new ProjectViewModel()
+                {
+                    Project = p,
+                    ProjectManager = db.Users.Find(p.PmId)
+                };
+                vm.Add(viewmodel);
+            }
 
-            return View(assignedProjects);
+            return View(vm);
         }
         // GET: My Projects
         //Gets projects that a Project Manager is assigned to *Manage*
@@ -40,8 +90,18 @@ namespace XCalibre.Controllers
         {
             var userId = User.Identity.GetUserId();
             var userProjects = db.Projects.Where(p => p.PmId == userId).ToList();
+            List<ProjectViewModel> vm = new List<ProjectViewModel>();
+            foreach (var p in userProjects)
+            {
+                ProjectViewModel viewmodel = new ProjectViewModel()
+                {
+                    Project = p,
+                    ProjectManager = db.Users.Find(p.PmId)
+                };
+                vm.Add(viewmodel);
+            }
 
-            return View(userProjects);
+            return View(vm);
         }
 
         // GET: My Assigned Tickets
@@ -50,7 +110,7 @@ namespace XCalibre.Controllers
         {
             
             var userTickets = db.Tickets.Where(u => u.AssignedToUserId == userId).Include(t => t.AssignedToUser).Include(t => t.Project).Include(t => t.TicketPriority).Include(t => t.TicketStatus).Include(t => t.TicketType);
-            return View(userTickets.ToList());
+            return View(userTickets.Where(t => t.Closed == false).ToList());
         }
 
         //GET: My Submitted Tickets
@@ -60,7 +120,7 @@ namespace XCalibre.Controllers
            
             var userTickets = db.Tickets.Where(u => u.OwnerUserId == userId);
            
-            return View(userTickets.ToList());
+            return View(userTickets.Where(t => t.Closed == false).ToList());
         }
             
         // GET: My Comments

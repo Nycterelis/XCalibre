@@ -14,6 +14,7 @@ namespace XCalibre.Models
         public string LastName { get; set; }
         public string FullName { get; set; }
         public string ProfilePicture { get; set; }
+        
 
 
         public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<ApplicationUser> manager)
@@ -25,9 +26,7 @@ namespace XCalibre.Models
             if (ProfilePicture != null)
             {
                 userIdentity.AddClaim(new Claim("Picture", ProfilePicture));
-
             }
-
             return userIdentity;
         }
 

@@ -16,9 +16,9 @@ namespace XCalibre.Controllers
         private ApplicationDbContext db = new ApplicationDbContext();
 
         // GET: TicketHistories
-        public ActionResult Index()
+        public ActionResult Index(int TicketId)
         {
-            var ticketHistories = db.TicketHistories.Include(t => t.Ticket).Include(t => t.User);
+            var ticketHistories = db.TicketHistories.Where(t => t.Ticket.Id == TicketId).Include(t => t.Ticket).Include(t => t.User);
             return View(ticketHistories.ToList());
         }
 

@@ -73,10 +73,10 @@
         </div>
         <!-- Personal-Information -->
 
-        <div class="card-box ribbon-box">
-            <div class="ribbon ribbon-primary">Messages</div>
+        <div class="card-box ribbon-box" hidden>
+            
             <div class="clearfix"></div>
-            <div class="inbox-widget">
+            @*<div class="inbox-widget">
                 <a href="#">
                     <div class="inbox-item">
                         <div class="inbox-item-img"><img src="assets/images/users/avatar-2.jpg" class="rounded-circle" alt=""></div>
@@ -149,49 +149,153 @@
                         </p>
                     </div>
                 </a>
-            </div>
+            </div>*@
         </div>
 
     </div>
 
 
     <div class="col-md-8">
+        @if (User.IsInRole("Admin"))
+        {
 
-        <div class="row">
-           
-            <div class="col-sm-4">
-                <div class="card-box tilebox-one">
-                    <i class="icon-layers float-right text-muted"></i>
-                    <h6 class="text-muted text-uppercase mt-0">Tickets</h6>
-                    <h2 class="m-b-20" data-plugin="counterup"></h2>@*Need to find a way to display a user's Ticket count here. Maybe create partial views and by rendering the partial?*@
-                    
-                </div>
-            </div><!-- end col -->
+            <div class="row">
 
-            <div class="col-sm-4">
-                <div class="card-box tilebox-one">
-                    <i class="icon-paypal float-right text-muted"></i>
-                    <h6 class="text-muted text-uppercase mt-0">Projects</h6>@*Same as tickets. Maybe since this is role dependent, 
-                                                                                by wrapping this in an if statement I can access the data I need a little easier.*@
-                    <h2 class="m-b-20">$<span data-plugin="counterup">46,782</span></h2>
-                    <span class="badge badge-danger"> -29% </span> <span class="text-muted">From previous period</span>
-                </div>
-            </div><!-- end col -->
+                <div class="col-sm-6">
+                    <div class="card-box tilebox-one">
+                        <i class="icon-layers float-right text-muted"></i>
 
-            <div class="col-sm-4">
-                <div class="card-box tilebox-one">
-                    <i class="icon-rocket float-right text-muted"></i>
-                    <h6 class="text-muted text-uppercase mt-0">Product Sold</h6>
-                    <h2 class="m-b-20" data-plugin="counterup">1,890</h2>
-                    <span class="badge badge-custom"> +89% </span> <span class="text-muted">Last year</span>
-                </div>
-            </div><!-- end col -->
-
-        </div>
-        <!-- end row -->
+                        <h6 class="text-muted text-uppercase mt-0">Submitted Tickets</h6>
+                        <h2 class="m-b-20" data-plugin="counterup">
+                            @Model.Select(t => t.SubmittedTicket).ToList().Count
+                        </h2>
 
 
-        <div class="card-box">
+                    </div>
+                </div><!-- end col -->
+
+                <div class="col-sm-6">
+                    <div class="card-box tilebox-one">
+                        <i class="icon-paypal float-right text-muted"></i>
+
+
+                        <h6 class="text-muted text-uppercase mt-0">Assigned Projects</h6>
+                        <h2 class="m-b-20">@Model.Select(p => p.Project).ToList().Count</h2>
+
+
+
+                    </div>
+                </div><!-- end col -->
+
+
+
+            </div><!-- end row -->
+        }
+        else if (User.IsInRole("ProjectManager"))
+        {
+
+            <div class="row">
+
+                <div class="col-sm-4">
+                    <div class="card-box tilebox-one">
+                        <i class="icon-layers float-right text-muted"></i>
+
+                        <h6 class="text-muted text-uppercase mt-0">Submitted Tickets</h6>
+                        <h2 class="m-b-20" data-plugin="counterup">
+                            @Model.Select(t => t.SubmittedTicket).ToList().Count
+                        </h2>
+
+
+                    </div>
+                </div><!-- end col -->
+
+                <div class="col-sm-4">
+                    <div class="card-box tilebox-one">
+                        <i class="icon-paypal float-right text-muted"></i>
+
+
+                        <h6 class="text-muted text-uppercase mt-0">Managed Projects</h6>
+                        <h2 class="m-b-20">@Model.Select(p => p.ManagedProject).ToList().Count</h2>
+
+
+
+                    </div>
+                </div><!-- end col -->
+                @if (User.IsInRole("Developer"))
+                {
+                    <div class="col-sm-2">
+                        <div class="card-box tilebox-one">
+                            <i class="icon-rocket float-right text-muted"></i>
+                            <h6 class="text-muted text-uppercase mt-0">Assigned Tickets</h6>
+                            <h2 class="m-b-20" data-plugin="counterup">@Model.Select(t => t.AssignedTicket).ToList().Count</h2>
+                        </div>
+                    </div><!-- end col -->
+                    <div class="col-sm-2">
+                        <div class="card-box tilebox-one">
+                            <i class="icon-rocket float-right text-muted"></i>
+                            <h6 class="text-muted text-uppercase mt-0">Assigned Projects</h6>
+                            <h2 class="m-b-20" data-plugin="counterup">@Model.Select(t => t.Project).ToList().Count</h2>
+                        </div>
+                    </div><!-- end col -->
+
+                }
+
+            </div><!-- end row -->
+        }
+        else if (User.IsInRole("Developer"))
+        {
+
+            <div class="row">
+
+                <div class="col-sm-6">
+                    <div class="card-box tilebox-one">
+                        <i class="icon-layers float-right text-muted"></i>
+
+                        <h6 class="text-muted text-uppercase mt-0">Assigned Tickets</h6>
+                        <h2 class="m-b-20" data-plugin="counterup">
+                            @Model.Select(t => t.AssignedTicket).ToList().Count
+                        </h2>
+
+
+                    </div>
+                </div><!-- end col -->
+
+                <div class="col-sm-6">
+                    <div class="card-box tilebox-one">
+                        <i class="icon-paypal float-right text-muted"></i>
+
+
+                        <h6 class="text-muted text-uppercase mt-0">Assigned Projects</h6>
+                        <h2 class="m-b-20">@Model.Select(p => p.Project).ToList().Count</h2>
+
+
+
+                    </div>
+                </div><!-- end col -->
+
+
+
+            </div><!-- end row -->
+        }
+        else if (User.IsInRole("Submitter"))
+        {
+
+            <div class="row">
+                <div class="col-sm-4">
+                    <div class="card-box tilebox-one">
+                        <i class="icon-layers float-right text-muted"></i>
+                        <h6 class="text-muted text-uppercase mt-0">Submitted Tickets</h6>
+                        <h2 class="m-b-20" data-plugin="counterup">
+                            @Model.Select(t => t.AssignedTicket).ToList().Count
+                        </h2>
+                    </div>
+                </div><!-- end col -->
+            </div><!-- end row -->
+        }
+
+
+
+        @*<div class="card-box">
             <h4 class="header-title mt-0 mb-3">Experience</h4>
             <div class="">
                 <div class="">
@@ -225,69 +329,40 @@
                 </div>
 
             </div>
-        </div>
+        </div>*@
+        @*@if (User.IsInRole("Developer"))
+        {
+            if (Model.Select(p => p.Project) != null)
+            {
+                <div class="card-box">
+                    <h4 class="header-title mb-3">My Projects</h4>
 
-        <div class="card-box">
-            <h4 class="header-title mb-3">My Projects</h4>
+                    <div id="MyProjects" class="table-responsive table-striped table-bordered dt-responsive nowrap" cellspacing="0">
+                        <table class="table m-b-0">
+                            <thead>
+                                <tr>
+                                    <th>Project Name</th>
+                                    <th>Open Tickets</th>
+                                    <th></th>
 
-            <div class="table-responsive">
-                <table class="table m-b-0">
-                    <thead>
-                        <tr>
-                            <th>#</th>
-                            <th>Project Name</th>
-                            <th>Start Date</th>
-                            <th>Due Date</th>
-                            <th>Status</th>
-                            <th>Assign</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>1</td>
-                            <td>Adminox Admin</td>
-                            <td>01/01/2015</td>
-                            <td>07/05/2015</td>
-                            <td><span class="label label-info">Work in Progress</span></td>
-                            <td>Coderthemes</td>
-                        </tr>
-                        <tr>
-                            <td>2</td>
-                            <td>Adminox Frontend</td>
-                            <td>01/01/2015</td>
-                            <td>07/05/2015</td>
-                            <td><span class="label label-success">Pending</span></td>
-                            <td>Coderthemes</td>
-                        </tr>
-                        <tr>
-                            <td>3</td>
-                            <td>Adminox Admin</td>
-                            <td>01/01/2015</td>
-                            <td>07/05/2015</td>
-                            <td><span class="label label-pink">Done</span></td>
-                            <td>Coderthemes</td>
-                        </tr>
-                        <tr>
-                            <td>4</td>
-                            <td>Adminox Frontend</td>
-                            <td>01/01/2015</td>
-                            <td>07/05/2015</td>
-                            <td><span class="label label-purple">Work in Progress</span></td>
-                            <td>Coderthemes</td>
-                        </tr>
-                        <tr>
-                            <td>5</td>
-                            <td>Adminox Admin</td>
-                            <td>01/01/2015</td>
-                            <td>07/05/2015</td>
-                            <td><span class="label label-warning">Coming soon</span></td>
-                            <td>Coderthemes</td>
-                        </tr>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var p in Model.Select(p => p.Project))
+                                {
+                                    <tr>
+                                        <td>@p.Name</td>
+                                        <td>@p.Tickets.ToList().Count</td>
+                                        <td>@Html.ActionLink("View", "Details", "Project", new { id = p.Id })</td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
 
-                    </tbody>
-                </table>
-            </div>
-        </div>
+            }
+        }*@
 
     </div>
     <!-- end col -->

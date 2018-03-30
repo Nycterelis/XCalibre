@@ -848,7 +848,7 @@ body {
   padding-bottom: 60px;
   overflow-x: hidden;
   font-size: 14px;
-  background-color: #f3f6f8;
+  background-color: #e3e6e8;
   font-family: "Roboto", sans-serif;
 }
 
@@ -2812,7 +2812,7 @@ code {
 }
 
 .alert-light {
-  background-color: #f3f6f8;
+  background-color: #e3e6e8;
   border-color: #e3eaef;
 }
 
@@ -3054,7 +3054,7 @@ code {
 
 /* Inbox-widget */
 .inbox-widget .inbox-item {
-  border-bottom: 1px solid #f3f6f8;
+  border-bottom: 1px solid #e3e6e8;
   overflow: hidden;
   padding: 10px 0;
   position: relative;
@@ -3129,7 +3129,7 @@ code {
 /* Transaction */
 .transaction-list li {
   padding: 7px 0;
-  border-bottom: 1px solid #f3f6f8;
+  border-bottom: 1px solid #e3e6e8;
   clear: both;
   position: relative;
 }
@@ -3162,7 +3162,7 @@ code {
 }
 
 .navtab-bg {
-  background-color: #f3f6f8;
+  background-color: #e3e6e8;
 }
 
 .nav-tabs > li > a, .nav-pills > li > a {
@@ -3924,7 +3924,7 @@ input[type="color"] {
 
 .select2-container--default .select2-search--dropdown {
   padding: 10px;
-  background-color: #f3f6f8;
+  background-color: #e3e6e8;
 }
 
 .select2-container--default .select2-search--dropdown .select2-search__field {
@@ -4293,7 +4293,7 @@ input[type="color"] {
 }
 
 .wizard > .steps {
-  background-color: #f3f6f8;
+  background-color: #e3e6e8;
 }
 
 .wizard > .steps .number {
@@ -4495,7 +4495,7 @@ th {
 }
 
 .table-striped tbody tr:nth-of-type(odd), .table-hover tbody tr:hover, .table-active, .table-active > td, .table-active > th {
-  background-color: #f3f6f8;
+  background-color: #e3e6e8;
 }
 
 .table-success, .table-success > td, .table-success > th {
@@ -4694,7 +4694,7 @@ table.dataTable > tbody > tr.child span.dtr-title {
 
 /* Tablesaw Tables */
 .tablesaw thead {
-  background: #f3f6f8;
+  background: #e3e6e8;
   background-image: none;
   border: none;
 }
@@ -4710,7 +4710,7 @@ table.dataTable > tbody > tr.child span.dtr-title {
 }
 
 .tablesaw td {
-  border-top: 1px solid #f3f6f8 !important;
+  border-top: 1px solid #e3e6e8 !important;
 }
 
 .tablesaw td, .tablesaw tbody th {

@@ -15,6 +15,7 @@ namespace XCalibre.Models
         public string SelectedUser { get; set; } //Using this for the Select
         public int Id { get; set; }
         public string Name { get; set; }
+        public string TempUrl { get; set; }
 
 
     }

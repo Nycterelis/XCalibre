@@ -11,6 +11,9 @@ namespace XCalibre.Models
         public Project Project { get; set; }
         public Ticket Ticket { get; set; }
         public TicketComment Comment { get; set; }
-
+        public ApplicationUser ProjectManager { get; set; }
+        public Project ManagedProject { get; set; }
+        public Ticket AssignedTicket { get; set; }
+        public Ticket SubmittedTicket { get; set; }
     }
 }

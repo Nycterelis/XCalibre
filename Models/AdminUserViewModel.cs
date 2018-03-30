@@ -17,6 +17,7 @@ namespace XCalibre.Models
         public string[] SelectedRoles { get; set; }
         public string Id { get; set; }
         public string Name { get; set; }
+        
 
         
         

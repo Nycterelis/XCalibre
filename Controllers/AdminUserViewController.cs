@@ -42,7 +42,7 @@ namespace XCalibre.Controllers
 
                 adminModelList.Add(adminModel);
             }
-            return View(adminModelList);
+            return View(adminModelList.OrderBy(n => n.User.LastName));
         }
 
         //GET: EditUser

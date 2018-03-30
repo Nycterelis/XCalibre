@@ -58,7 +58,7 @@
                     </a>
                     <div class="dropdown-menu dropdown-menu-right" aria-labelledby="btnGroupDrop1">
                         <a class="dropdown-item" href=@Url.Action("Edit", new { id = item.Project.Id})>Edit</a>
-                        <a class="dropdown-item" href=@Url.Action("Edit", new { id = item.Project.Id})>Delete</a>
+                        <a class="dropdown-item" href=@Url.Action("Delete", new { id = item.Project.Id})>Delete</a>
                         <a class="dropdown-item" href="@Url.Action("EditProjectUser", "AdminProjectView", new { id = item.Project.Id})">Edit Members</a>
                         <a class="dropdown-item" href=@Url.Action("EditProjectManager", "AdminProjectView", new { id = item.Project.Id })>Assign Project Manager</a>
                     </div>

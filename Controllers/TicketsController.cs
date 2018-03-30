@@ -111,7 +111,7 @@ namespace XCalibre.Controllers
 
 
                 await UserManager.SendEmailAsync(projectManager, "New Ticket", "A new ticket has been submitted for one of your managed projects. Please login to view details.");
-                return RedirectToAction("Index");
+                return RedirectToAction("Details", "Projects", new { id = ticket.ProjectId });
             }
 
             //ViewBag.AssignedToUserId = new SelectList(db.Users, "Id", "FirstName", ticket.AssignedToUserId);
@@ -124,7 +124,8 @@ namespace XCalibre.Controllers
         }
 
         // GET: Tickets/Edit/5
-        [Authorize(Roles = "Admin, ProjectManager")]
+        [Authorize(Roles = "Admin, ProjectManager, Developer, Submitter" +
+            "")]
         public ActionResult Edit(int? id)
         {
             UserRoleHelper helper = new UserRoleHelper();
@@ -250,13 +251,13 @@ namespace XCalibre.Controllers
             }
             ViewBag.AssignedToUserId = new SelectList(helper.UsersInRole("Developer"), "Id", "FirstName", ticket.AssignedToUserId);
 
-            return View();
+            return View(ticket);
         }
         //POST: Assigning a developer to a ticket
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize(Roles = "Admin, ProjectManager")]
-        public async Task<ActionResult> EditUser([Bind(Include = "AssignedToUserId, SelectedUser, Id, Name")]Ticket ticket)
+        public async Task<ActionResult> EditUser([Bind(Include = "SelectedUser,Id,Title,Body,Created,Updated,ProjectId,TicketTypeId,TicketPriorityId,TicketStatusId,OwnerUserId,AssignedToUserId")]Ticket ticket)
         {
             if (ModelState.IsValid)
             {

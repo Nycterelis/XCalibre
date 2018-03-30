@@ -11,11 +11,11 @@
     <div class="form-horizontal">
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         @Html.HiddenFor(model => model.Id)
-        @Html.HiddenFor(model => model.OwnerUser)
         @Html.HiddenFor(model => model.OwnerUserId)
         @Html.HiddenFor(model => model.Created)
         @Html.HiddenFor(model => model.ProjectId)
-        @Html.HiddenFor(model => model.Project)
+        @Html.HiddenFor(model => model.TicketTypeId)
+        @Html.HiddenFor(model => model.TicketPriorityId)
         @Html.HiddenFor(model => model.Body)
         @Html.HiddenFor(model => model.Title)
 

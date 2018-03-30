@@ -70,7 +70,7 @@
                         <!--<li class="menu-title">Navigation</li>-->
 
                         <li>
-                            <a href="@Url.Action("Dashboard", "Home")">
+                            <a href="@Url.Action("Dashboard", "Home", new {userid = User.Identity.GetUserId() })">
 
                                 <i class="fi-air-play"></i> <span> Dashboard </span>
                             </a>
@@ -99,23 +99,37 @@
                         <li>
                             <a href="javascript: void(0);"><i class="fi-paper"></i> <span> Tickets </span> <span class="menu-arrow"></span></a>
                             <ul class="nav-second-level" aria-expanded="false">
-                                <li><a href=@Url.Action("Index", "Tickets", null)>Tickets</a></li>
+                                <li><a href=@Url.Action("Index", "Tickets", null)>Open Tickets</a></li>
+                                <li><a href=@Url.Action("ClosedTickets", "Tickets", null)>Closed Tickets</a></li>
+                                <li><a href=@Url.Action("AllTickets", "Tickets")>All Tickets</a></li>
                                 @if (User.IsInRole("Submitter"))
                                 {
                                     <li><a href=@Url.Action("MySubmittedTickets", "UserPersonal", new { userId = User.Identity.GetUserId() })>My Tickets</a></li>
                                 }
                                 @if (User.IsInRole("ProjectManager"))
                                 {
-                                    <li><a href="tables-datatable.html">My Tickets</a></li>
+                                    <li><a href=@Url.Action("MySubmittedTickets", "UserPersonal", new { userId = User.Identity.GetUserId() })>My Tickets</a></li>
                                 }
                                 @if (User.IsInRole("Developer"))
                                 {
-                                    <li><a href="tables-datatable.html">My Tickets</a></li>
+                                    <li><a href=@Url.Action("MyAssignedTickets", "UserPersonal", new { userId = User.Identity.GetUserId() })>My Tickets</a></li>
                                 }
-                                <li><a href="tables-responsive.html">Submit A New Ticket</a></li>
+
 
                             </ul>
                         </li>
+                        @if (User.IsInRole("Admin"))
+                        {
+                            <li>
+                                <a href="javascript: void(0);"><i class="dripicons-user"></i><span>Users</span><span class="menu-arrow"></span></a>
+                                <ul class="nav-second-level" aria-expanded="false">
+                                    <li>
+                                        <a href=@Url.Action("Index", "AdminUser")>All Users</a>
+                                    </li>
+                                </ul>
+
+                            </li>
+                        }
 
 
                     </ul>
@@ -211,7 +225,7 @@
     <!-- Responsive examples -->
     @*<script src="~/assets/plugins/datatables/dataTables.responsive.min.js"></script>
         <script src="~/assets/plugins/datatables/responsive.bootstrap4.min.js"></script>*@
-
+    <script src="~/Scripts/ckeditor/ckeditor.js"></script>
 
     <!-- App js -->
     <script src="~/assets/js/jquery.core.js"></script>
@@ -224,6 +238,7 @@
         $(document).ready(function () {
 
             $('#AllTickets').DataTable();
+            $('#MyProjects').DataTable();
 
 
         });
@@ -248,7 +263,11 @@
         });
 
     </script>
-
+    <script>
+        // Replace the <textarea id="editor1"> with a CKEditor
+        // instance, using default configuration.
+        CKEDITOR.replace('editor1');
+    </script>
 
 
 </body>

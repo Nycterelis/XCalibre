@@ -90,7 +90,7 @@ namespace XCalibre.Controllers
         }
 
         // GET: Projects/Create
-        [Authorize(Roles = "Admin")]
+        [Authorize(Roles = "Admin, ProjectManager")]
         public ActionResult Create()
         {
             return View();
@@ -115,7 +115,7 @@ namespace XCalibre.Controllers
         }
 
         // GET: Projects/Edit/5
-        [Authorize(Roles = "Admin")]
+        [Authorize(Roles = "Admin, ProjectManager")]
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -148,7 +148,7 @@ namespace XCalibre.Controllers
         }
 
         // GET: Projects/Delete/5
-        [Authorize(Roles = "Admin")]
+        [Authorize(Roles = "Admin, ProjectManager")]
         public ActionResult Delete(int? id)
         {
             if (id == null)
@@ -166,7 +166,7 @@ namespace XCalibre.Controllers
         // POST: Projects/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        [Authorize(Roles = "Admin")]
+        [Authorize(Roles = "Admin, ProjectManager")]
         public ActionResult DeleteConfirmed(int id)
         {
             Project project = db.Projects.Find(id);
@@ -177,6 +177,35 @@ namespace XCalibre.Controllers
             {
                 tick.Closed = true;
             }
+            db.SaveChanges();
+            return RedirectToAction("Index");
+        }
+
+        // GET: Projects/Reopen/5
+        [Authorize(Roles = "Admin, ProjectManager")]
+        public ActionResult Reopen(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            Project project = db.Projects.Find(id);
+            if (project == null)
+            {
+                return HttpNotFound();
+            }
+            return View(project);
+        }
+
+        // POST: Projects/Reopen/5
+        [HttpPost, ActionName("ReOpen")]
+        [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Admin, ProjectManager")]
+        public ActionResult ReopenConfirmed(int id)
+        {
+            Project project = db.Projects.Find(id);
+            project.Closed = false;
+            var proj = project.Tickets;
             db.SaveChanges();
             return RedirectToAction("Index");
         }
