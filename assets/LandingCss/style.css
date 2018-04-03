@@ -199,6 +199,9 @@ section#language .content {
     max-width: 850px;
     padding: 20px;
 }
+.aboutBt {
+    color: #ffffff;
+}
 
 /* ------------------------------- */
 /* navbar */

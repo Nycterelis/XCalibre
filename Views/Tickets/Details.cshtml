@@ -204,7 +204,7 @@
                                         <h5 class="mt-0">@comm.User.FullName <span> on @comm.Created.ToString("MMM dd yyyy")</span></h5>
                                     </p>
                                     <p class="font-13 text-muted mb-0">
-                                        @comm.Body
+                                        @Html.Raw(comm.Body)
                                     </p>
                                 </li>
                             }

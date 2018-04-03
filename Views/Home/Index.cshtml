@@ -34,26 +34,52 @@
     <section id="landingpage">
         <div class="overlayland">
             <div class="text-center">
+                <div class="text-right top-right">
+                    @Html.ActionLink("Register", "Register", "Account", routeValues: null, htmlAttributes: new { id = "registerLink", @class = "btn btn-secondary", })
+                    @Html.ActionLink("Log in", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink", @class = "btn btn-primary" })
+
+                </div>
                 <div class="land-text">
                     <h1>
                         XCalibre BugTracker
                     </h1>
                     <br />
                     <br />
-                   
+                    <p>
+                        Below are demo logins. Please try one and explore the bug tracker!
+                    </p>
                     <h2>
-                        @Html.ActionLink("Register", "Register", "Account", routeValues: null, htmlAttributes: new { id = "registerLink", @class = "btn btn-secondary" })
-                        @Html.ActionLink("Log in", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink", @class = "btn btn-primary" })
                         <br />
-                        @Html.ActionLink("Login As Guest Admin", "GuestLogin", "Account", new { ReturnUrl = ViewBag.ReturnUrl, type = "Admin" }, new { @class = "btn btn-danger" })
-                        @Html.ActionLink("Login As Guest Project Manager", "GuestLogin", "Account", new { ReturnUrl = ViewBag.ReturnUrl, type = "ProjectManager" }, new { @class = "btn btn-warning" })
-                        @Html.ActionLink("Login As Guest Developer", "GuestLogin", "Account", new { ReturnUrl = ViewBag.ReturnUrl, type = "Developer" }, new { @class = "btn btn-success" })
-                        @Html.ActionLink("Login As Guest Submitter", "GuestLogin", "Account", new { ReturnUrl = ViewBag.ReturnUrl, type = "Submitter" }, new { @class = "btn btn-custom" })
+                        @Html.ActionLink("Guest Admin", "GuestLogin", "Account", new { ReturnUrl = ViewBag.ReturnUrl, type = "Admin" }, new { @class = "btn btn-custom btn-rounded btn-lg col-4" })
+                        @Html.ActionLink("Guest PM", "GuestLogin", "Account", new { ReturnUrl = ViewBag.ReturnUrl, type = "ProjectManager" }, new { @class = "btn btn-custom btn-rounded btn-lg col-4" })
+                        @Html.ActionLink("Guest Developer", "GuestLogin", "Account", new { ReturnUrl = ViewBag.ReturnUrl, type = "Developer" }, new { @class = "btn btn-custom btn-rounded btn-lg col-4" })
+                        @Html.ActionLink("Guest Submitter", "GuestLogin", "Account", new { ReturnUrl = ViewBag.ReturnUrl, type = "Submitter" }, new { @class = "btn btn-custom btn-rounded btn-lg col-4" })
 
                     </h2>
                 </div>
             </div>
         </div>
+            <div class="row col-12">
+                <div class="col-3 float-left">
+                    <p class="aboutBt">
+                        XCalibre Bug Tracking and Ticketing System was made primarily through C#, with touches of CSS, JavaScript, and JQuery for beautification.
+                        The Database is handled through Microsoft SQL Server, and as such the code also contains a fair amount of LINQ to read
+                        and write to the database. Out of box, there are four roles: Admin, Project Manager, Developer, and Submitter. There are three
+                        Ticket Types: Production Fix, Software Update, and Project Task. There are six Ticket Statuses: New, Assigned, In Development, Testing,
+                        Approved, and Resolved. There are also five Priorities for tickets: New, Urgent, High, Med(ium), and Low. Lastly, Projects and Tickets
+                        cannot be deleted. A soft delete has been implemented via a boolean value named "Closed".
+                    </p>
+                </div>
+
+            </div>
+            <div class="col-3 float-right">
+                <p>
+                    Histories are created for each change made to a ticket, logging both the old value and the new value of the changed property. Histories are not created,
+                    however, for the creation or editing of comments and attachments for each tickets. Instead, notifications, sent to the e-mail with which the user registered,
+                    will notify the Developer that's been assigned to the ticket. Additionally, Project Managers assigned as the specific Project Manager of a given project will
+                    be notified by email whenever a new ticket is made for the project.
+                </p>
+            </div>
     </section>
 
     <!--=======================================

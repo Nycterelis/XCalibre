@@ -74,8 +74,9 @@ namespace XCalibre.Controllers
 
         // GET: Tickets/Create
         [Authorize(Roles = "Submitter, ProjectManager, Admin")]
-        public ActionResult Create(int projectId)
+        public ActionResult Create(int projectId, string returnUrl)
         {
+            ViewBag.ReturnUrl = returnUrl;
             //ViewBag.AssignedToUserId = new SelectList(db.Users, "Id", "FirstName");
             //ViewBag.OwnerUserId = new SelectList(db.Users, "Id", "FirstName");
             ViewBag.ProjectId = projectId;
@@ -93,7 +94,7 @@ namespace XCalibre.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize(Roles = "Admin, Submitter, ProjectManager")]
-        public async Task<ActionResult> Create([Bind(Include = "Id,Title,Body,Created,ProjectId,Project,TicketTypeId,TicketPriorityId,TicketStatusId,OwnerUserId,AssignedToUserId")] Ticket ticket)
+        public async Task<ActionResult> Create([Bind(Include = "Id,Title,Body,Created,ProjectId,Project,TicketTypeId,TicketPriorityId,TicketStatusId,OwnerUserId,AssignedToUserId")] Ticket ticket, string returnUrl)
         {
             if (ModelState.IsValid)
             {
@@ -102,6 +103,7 @@ namespace XCalibre.Controllers
                 ticket.TicketPriorityId = db.TicketPriorities.First(i => i.Id == 5).Id;
                 ticket.OwnerUserId = User.Identity.GetUserId();
                 ticket.AssignedToUserId = db.Users.FirstOrDefault(n => n.FirstName == "Unassigned").Id;
+                //ticket.ProjectId = projectId;
                 
                 db.Tickets.Add(ticket);
                 db.SaveChanges();
@@ -112,6 +114,7 @@ namespace XCalibre.Controllers
 
                 await UserManager.SendEmailAsync(projectManager, "New Ticket", "A new ticket has been submitted for one of your managed projects. Please login to view details.");
                 return RedirectToAction("Details", "Projects", new { id = ticket.ProjectId });
+                //return RedirectToLocal(returnUrl);
             }
 
             //ViewBag.AssignedToUserId = new SelectList(db.Users, "Id", "FirstName", ticket.AssignedToUserId);
@@ -124,8 +127,7 @@ namespace XCalibre.Controllers
         }
 
         // GET: Tickets/Edit/5
-        [Authorize(Roles = "Admin, ProjectManager, Developer, Submitter" +
-            "")]
+        [Authorize(Roles = "Admin, ProjectManager, Developer, Submitter")]
         public ActionResult Edit(int? id)
         {
             UserRoleHelper helper = new UserRoleHelper();
@@ -154,7 +156,7 @@ namespace XCalibre.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        [Authorize(Roles = "Admin, ProjectManager")]
+        [Authorize(Roles = "Admin, ProjectManager, Developer, Submitter")]
         public async Task<ActionResult> Edit([Bind(Include = "Id,Title,Body,Created,Updated,ProjectId,TicketTypeId,TicketPriorityId,TicketStatusId,OwnerUserId,AssignedToUserId")] Ticket ticket)
         {
             //if (ModelState.IsValid)
@@ -206,12 +208,7 @@ namespace XCalibre.Controllers
                             };
 
                             db.TicketHistories.Add(ticketHistory);
-                            //If Block for Emails
-                            //if (prop.Name == "AssignedToUserId")
-                            //{
-                            //    await UserManager.SendEmailAsync(oldValue, "Ticket", "You have been removed from" + ticket.Title + ".");
-                            //    await UserManager.SendEmailAsync(newValue, "New Assignment", "You have been assigned to the ticket," + ticket.Title + ". Please login to view details.");
-                            //};
+                            
                             if (prop.Name == "TicketPriorityId")
                             {
                                 await UserManager.SendEmailAsync(ticket.AssignedToUserId, "New Ticket Priority", "One of your tickets have changed in priority. Please login to view details");
@@ -313,7 +310,7 @@ namespace XCalibre.Controllers
         // POST: Tickets/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        [Authorize(Roles = "Admin")]
+        [Authorize(Roles = "Admin, ProjectManager")]
         public ActionResult DeleteConfirmed(int id)
         {
             Ticket ticket = db.Tickets.Find(id);
@@ -331,5 +328,13 @@ namespace XCalibre.Controllers
             }
             base.Dispose(disposing);
         }
+    private ActionResult RedirectToLocal(string returnUrl)
+    {
+        if (Url.IsLocalUrl(returnUrl))
+        {
+            return Redirect(returnUrl);
+        }
+        return RedirectToAction("Index", "Home");
+    }
     }
 }
